@@ -1,0 +1,62 @@
+{% extends 'index2.html' %}
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
+<!--<title>Untitled Document</title>-->
+<!--<style type="text/css">-->
+<!--#category {-->
+<!--	font-size: medium;-->
+<!--}-->
+<!--</style>-->
+<!--&lt;!&ndash;  <script >&ndash;&gt;-->
+<!--&lt;!&ndash;    alert('{{ message }}')&ndash;&gt;-->
+<!--&lt;!&ndash;  </script>&ndash;&gt;-->
+<!--</head>-->
+
+<!--<body>-->
+
+
+{% block content %}
+<br><br><br>
+<form method="post" action="{% url 'addcat' %}" method="post">
+                   {% csrf_token %}
+<div align="right"><input name="category" type="text" id="category" align="right" required /><input  type="submit" value="addnew"/></div>
+  <div align="right">
+
+<div>
+    <table id="example" class="display" >
+ <thead>
+
+      <tr>
+        <td width="10" height="69">Sl No</td>
+        <td width="100">Category</td>
+        <td width="50"></td>
+      </tr>
+ </thead>
+        <tbody >
+      {% for cat in catgry %}
+      <tr>
+        <td>{{forloop.counter}}
+         </td>
+        <td>{{cat.name}} </td><td><a href="{% url 'deletecat' cat.id %}">Delete</a> </td>
+      </tr>
+       {% endfor %}
+        </tbody>
+  </table>
+  </div>
+    </div>
+
+</form>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+    $('#example').DataTable();
+
+});
+
+</script>
+{% endblock %}
+<!--</body>-->
+<!--</html>-->

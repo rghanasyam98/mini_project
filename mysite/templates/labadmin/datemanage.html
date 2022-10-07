@@ -1,0 +1,162 @@
+<html>
+    <head>
+    <title>How to disable previous dates in date picker using JQuery - devnote.in</title>
+<!--    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>-->
+<!--        <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" >-->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+</head>
+<body>
+<form  action="{% url 'add_date'  %}" method="post">
+       {% csrf_token %}
+    <h1>Select Date</h1>
+    Date : <input id="date_picker" type="date" name="tdate">
+
+    <div align="left"><input name="add_date" type="submit" id="add_date" value="Add Date" /></div>
+<!--<div align="right"><select name="ddate" id="ddate">-->
+<!--  {% for x in disday %}-->
+<!--  <option value="{{ x.id }}"  >{{x.date}}</option>-->
+<!--&lt;!&ndash;     {% if cat.id == caty.id %} selected  {% endif %}&ndash;&gt;-->
+<!--  {% endfor %}-->
+<!--</select></div>-->
+
+
+
+
+<table id="example" class="display" >
+ <thead>
+  <tr>
+      <th width="196"><div align="center">SlNo</div></th>
+      <th width="196"><div align="center">Date</div></th>
+    <th width="196"><div align="center">Start</div></th>
+    <th width="117"><div align="center">AM/PM</div></th>
+    <th width="187"><div align="center">End</div></th>
+    <th width="193"><div align="center">AM/PM</div></th>
+    <th width="83"><div align="center">Strength</div></th>
+    <th width="124"><div align="center">Balance Strength</div></th>
+    <th width="112"><div align="center">Status</div></th>
+    <th width="129"><div align="center">Category</div></th>
+    <th width="129">&nbsp;</td>
+  </tr>
+  </thead>
+  <tbody id="tableData">
+  {% for d in dd %}
+  <tr>
+      <td>{{ forloop.counter }} </td>
+      <td>{{ d.date }} </td>
+    <td>{{ d.start }} </td>
+    <td>{{ d.t1 }} </td>
+    <td>{{ d.end }} </td>
+    <td>{{ d.t2 }} </td>
+    <td>{{ d.strength }} </td>
+    <td>{{ d.astrength }} </td>
+    <td>{{ d.status }} </td>
+    <td>{{ d.category_id }} </td>
+    <td><a href="{% url 'deletedayslot' d.id %}">Delete</a> </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+   <tfoot>
+    <tr>
+         <th width="196"><div align="center">SlNo</div></th>
+        <th width="196"><div align="center">Date</div></th>
+    <th width="196"><div align="center">Start</div></th>
+    <th width="117"><div align="center">AM/PM</div></th>
+    <th width="187"><div align="center">End</div></th>
+    <th width="193"><div align="center">AM/PM</div></th>
+    <th width="83"><div align="center">Strength</div></th>
+    <th width="124"><div align="center">Balance Strength</div></th>
+    <th width="112"><div align="center">Status</div></th>
+    <th width="129"><div align="center">Category</div></th>
+    <th width="129">&nbsp;</td>
+  </tr>
+   </tfoot>
+</table>
+
+
+</form>
+
+
+</body>
+
+     <script language="javascript">
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+        $('#date_picker').attr('min',today);
+    </script>
+
+
+<!--<script type="text/javascript">-->
+
+<!--$(document).ready(function() {-->
+<!--        $("#ddate").change(function(){-->
+
+<!--            id = $('#category option:selected').val();-->
+
+<!--            let request_url = "{% url 'listbydate' %}";-->
+
+<!--           $.ajax(-->
+<!--            {-->
+<!--                type:"GET",-->
+<!--                datatype: 'json',-->
+<!--                url: request_url,-->
+<!--                data:{-->
+<!--                         cat_id: id-->
+<!--                },-->
+<!--                success: function( data )-->
+<!--                {-->
+<!--                    tableFromResponse(data);-->
+
+<!--                },-->
+
+<!--      errors: function (e) {-->
+
+<!--              }-->
+<!--     })-->
+
+<!--        })-->
+<!--    })-->
+
+<!--  function tableFromResponse(responseData) {-->
+
+<!--        var mainObj = JSON.parse(responseData.testresult);-->
+
+<!--        var k = '<tbody>'-->
+
+<!--        for(i = 0;i < mainObj.length; i++){-->
+
+<!--            k+= '<tr>';-->
+<!--            k+= '<td align="center">'+ (i+1) +'</td>'-->
+<!--            k+= '<td  align="center">' + mainObj[i]["fields"]["start"] + '</td>';-->
+<!--            k+= '<td  align="center">' + mainObj[i]["fields"]["t1"] + '</td>';-->
+<!--            k+= '<td  align="center">' + mainObj[i]["fields"]["end"] + '</td>';-->
+<!--            k+= '<td  align="center">' + mainObj[i]["fields"]["t2"] + '</td>';-->
+<!--            k+= '<td  align="center">' + mainObj[i]["fields"]["strength"] + '</td>';-->
+<!--            k+= '<td  align="center">' + mainObj[i]["fields"]["astrength"] + '</td>';-->
+<!--            k+= '<td  align="center">' + mainObj[i]["fields"]["status"] + '</td>';-->
+<!--            k+= '<td  align="center"> <a href="/deletetest/'+mainObj[i]["pk"]+'">Delete</a> ';-->
+<!--            k+= '</tr>';-->
+<!--        }-->
+<!--        k+='</tbody>';-->
+<!--        document.getElementById('tableData').innerHTML = k;-->
+<!--}-->
+
+<!--</script>-->
+<script type="text/javascript">
+
+    $(document).ready(function () {
+    $('#example').DataTable();
+
+});
+
+</script>
+</html>
