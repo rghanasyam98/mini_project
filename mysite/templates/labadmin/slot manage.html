@@ -1,0 +1,127 @@
+{% extends 'index2.html' %}
+
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
+<!--<title>Untitled Document</title>-->
+<!--</head>-->
+
+{% block content %}
+<body>
+
+
+<br><br><br><br>
+<form action="{% url 'slot' %}" method="post">
+  {% csrf_token %}
+<div align="right">
+
+ <select name="category" id="category">
+  {% for cat in catgry %}
+    <option value="{{ cat.id }}"  {% if cat.id == caty.id %} selected  {% endif %}>{{ cat.name }}</option>
+   {% endfor %}
+  </select></div>
+
+  <input type="submit" name="addtest" id="addslot" value="Add New" />
+    <div>
+<table width="1393" border="1">
+  <tr>
+    <td width="62" height="57"><div align="center">Sl No</div></td>
+    <td width="485"><div align="center">Start</div></td>
+    <td width="505"><div align="center">AM/PM</div></td>
+      <td width="485"><div align="center">End</div></td>
+    <td width="505"><div align="center">AM/PM</div></td>
+      <td width="505"><div align="center">Strength</div></td>
+<!--    <td width="153"><div align="center">Status</div></td>-->
+    <td width="154"><div align="center">
+
+    </div></td>
+  </tr>
+  <tbody id="tableData">
+
+  {% for s in slt %}
+  <tr><td align="center">{{ forloop.counter }}</td>
+    <td align="center">{{ s.start }}</td>
+    <td align="center">{{ s.t1 }}</td>
+    <td align="center">{{ s.end }}</td>
+    <td align="center">{{ s.t2 }}</td>
+       <td align="center">{{ s.strength }}</td>
+     <td align="center"> <a href="{% url 'updateslot' s.id %}">Edit</a>&nbsp;<a href="{% url 'deleteslot' s.id %}">Delete</a></td>
+  </tr>
+  {% endfor %}
+
+
+
+  </tbody>
+</table>
+        </div>
+
+
+</form>
+
+</body>
+</html>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+        $("#category").change(function(){
+
+            id = $('#category option:selected').val();
+
+            let request_url = "{% url 'listcat2' %}";
+
+           $.ajax(
+            {
+                type:"GET",
+                datatype: 'json',
+                url: request_url,
+                data:{
+                         cat_id: id
+                },
+                success: function( data )
+                {
+                    tableFromResponse(data);
+
+                },
+
+      errors: function (e) {
+
+              }
+     })
+
+        })
+    })
+
+  function tableFromResponse(responseData) {
+
+        var mainObj = JSON.parse(responseData.slotresult);
+
+        var k = '<tbody>'
+
+        for(i = 0;i < mainObj.length; i++){
+
+
+            k+= '<tr>';
+            k+= '<td align="center">'+ (i+1) +'</td>'
+            k+= '<td align="center">' + mainObj[i]["fields"]["start"] + '</td>';
+            k+= '<td align="center">' + mainObj[i]["fields"]["t1"] + '</td>';
+            k+= '<td align="center">' + mainObj[i]["fields"]["end"] + '</td>';
+            k+= '<td align="center">' + mainObj[i]["fields"]["t2"] + '</td>';
+            k+= '<td align="center">' + mainObj[i]["fields"]["strength"] + '</td>';
+            k+= '<td align="center"> <a href="/updateslot/'+mainObj[i]["pk"]+'">Edit </a> <a href="/deleteslot/'+mainObj[i]["pk"]+'">Delete</a> ';
+
+
+
+            k+= '</tr>';
+        }
+        k+='</tbody>';
+        document.getElementById('tableData').innerHTML = k;
+}
+
+</script>
+{% endblock %}

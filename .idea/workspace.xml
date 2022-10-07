@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4a251606-24b0-4d45-ad2b-f274fb1525af" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="2ELiDDLpPV23L13jxp7UVXGx6cV" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\GHANASYAM\PycharmProjects\Sample\mysite\labadmin\static" />
+      <recent name="C:\Users\GHANASYAM\PycharmProjects\Sample\mysite\templates" />
+      <recent name="C:\Users\GHANASYAM\PycharmProjects\Sample\mysite\templates\customer" />
+      <recent name="C:\Users\GHANASYAM\PycharmProjects\Sample\mysite\labadmin\templates" />
+      <recent name="C:\Users\GHANASYAM\PycharmProjects\Sample\mysite\customer\templates" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\GHANASYAM\PycharmProjects\Sample\mysite\templates" />
+      <recent name="C:\Users\GHANASYAM\PycharmProjects\Sample\mysite\labadmin" />
+      <recent name="C:\Users\GHANASYAM\PycharmProjects\Sample\mysite" />
+      <recent name="C:\Users\GHANASYAM\PycharmProjects\Sample\mysite\templates\customer" />
+      <recent name="C:\Users\GHANASYAM\PycharmProjects\Sample\mysite\templates\labadmin" />
+    </key>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4a251606-24b0-4d45-ad2b-f274fb1525af" name="Default Changelist" comment="" />
+      <created>1662381148589</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1662381148589</updated>
+      <workItem from="1662381168618" duration="12952000" />
+      <workItem from="1662436137861" duration="7850000" />
+      <workItem from="1662460412143" duration="18759000" />
+      <workItem from="1662524234176" duration="22195000" />
+      <workItem from="1662634985998" duration="18619000" />
+      <workItem from="1662700288807" duration="25709000" />
+      <workItem from="1662787618323" duration="26569000" />
+      <workItem from="1662874249960" duration="9649000" />
+      <workItem from="1662970743938" duration="7047000" />
+      <workItem from="1662989002153" duration="310000" />
+      <workItem from="1663575701661" duration="1383000" />
+      <workItem from="1663836822454" duration="772000" />
+      <workItem from="1663946595806" duration="9034000" />
+      <workItem from="1664029897726" duration="1386000" />
+      <workItem from="1664172127984" duration="10279000" />
+      <workItem from="1664472756776" duration="1724000" />
+      <workItem from="1664524087256" duration="1365000" />
+      <workItem from="1664541117310" duration="6415000" />
+      <workItem from="1664617947412" duration="1355000" />
+      <workItem from="1664629756342" duration="9516000" />
+      <workItem from="1664682028785" duration="31763000" />
+      <workItem from="1664769068571" duration="1184000" />
+      <workItem from="1664892238489" duration="74000" />
+      <workItem from="1664892314958" duration="10174000" />
+      <workItem from="1664941780014" duration="3086000" />
+      <workItem from="1664950478634" duration="16654000" />
+      <workItem from="1665048540957" duration="5242000" />
+      <workItem from="1665054380475" duration="26345000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="526" y="216" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1662386510675">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="526" y="216" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1662386510675" />
+    <state x="549" y="163" key="FileChooserDialogImpl" timestamp="1664892309959">
+      <screen x="0" y="0" width="1536" height="816" />
+    </state>
+    <state x="549" y="163" key="FileChooserDialogImpl/0.0.1536.816@0.0.1536.816" timestamp="1664892309959" />
+    <state x="465" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1665054383643">
+      <screen x="0" y="0" width="1536" height="816" />
+    </state>
+    <state x="465" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.816@0.0.1536.816" timestamp="1665054383643" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1664771633483" />
+    <state x="431" y="144" width="672" height="672" key="search.everywhere.popup" timestamp="1664970413500">
+      <screen x="0" y="0" width="1536" height="816" />
+    </state>
+    <state x="431" y="144" width="672" height="672" key="search.everywhere.popup/0.0.1536.816@0.0.1536.816" timestamp="1664970413500" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1662751565701" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/mysite/mysite/settings.py</url>
+          <line>36</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
