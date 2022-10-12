@@ -1,6 +1,4 @@
 
-
-
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.serializers import serialize
 from django.http import HttpResponse, JsonResponse
@@ -10,6 +8,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 import json
 import datetime
+from django.conf import settings
+import razorpay
+from django.views.decorators.csrf import csrf_exempt
 
 from django.apps import apps
 Category = apps.get_model('labadmin', 'Category')
@@ -25,21 +26,28 @@ Order=apps.get_model('labadmin', 'Order')
 
 
 
+# authorize razorpay client with API Keys.
+razorpay_client = razorpay.Client(
+    auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
+
 # Create your views here.
 #
 # from labadmin.models import Patient,Slot,Customer,User,Appointment,Category,Feedback,Home,Info,Order,Payment,Result,Test
 
 def index(request):
     print("hai")
-    return render(request, '/labadmin/templates/login.html')
+    return render(request, 'index3.html')
 
 
 
 @login_required
 def testview(request):
     catgry = Category.objects.order_by('name')[:]
-    test = Test.objects.all()
-    context = {'catgry': catgry, 'test': test}
+
+    caty = Category.objects.all().first()
+    test = Test.objects.filter(category_id=caty.id)
+    # test = Test.objects.all()
+    context = {'catgry': catgry, 'test': test,'caty':caty}
 
     return render(request,'customer/user view tests.html',context)
 
@@ -353,4 +361,110 @@ def book3(request):
 
 
     return render(request,'customer/booking4.html')
+
+
+
+#payment portion
+def home(request):
+    currency = 'INR'
+    amount = 20000  # Rs. 200
+
+    # Create a Razorpay Order
+    razorpay_order = razorpay_client.order.create(dict(amount=amount,
+                                                       currency=currency,
+                                                       payment_capture='0'))
+
+    # order id of newly created order.
+    razorpay_order_id = razorpay_order['id']
+    callback_url = 'paymenthandler'
+
+    # we need to pass these details to frontend.
+    context = {}
+    context['razorpay_order_id'] = razorpay_order_id
+    context['razorpay_merchant_key'] = settings.RAZOR_KEY_ID
+    context['razorpay_amount'] = amount
+    context['currency'] = currency
+    context['callback_url'] = callback_url
+
+    return render(request, 'payment.html', context=context)
+
+
+# we need to csrf_exempt this url as
+# POST request will be made by Razorpay
+# and it won't have the csrf token.
+@csrf_exempt
+def paymenthandler(request):
+    # only accept POST request.
+    print('fff');
+    if request.method == "POST":
+        try:
+
+            # get the required parameters from post request.
+            payment_id = request.POST.get('razorpay_payment_id', '')
+            razorpay_order_id = request.POST.get('razorpay_order_id', '')
+            signature = request.POST.get('razorpay_signature', '')
+            params_dict = {
+                'razorpay_order_id': razorpay_order_id,
+                'razorpay_payment_id': payment_id,
+                'razorpay_signature': signature
+            }
+
+            # verify the payment signature.
+            result = razorpay_client.utility.verify_payment_signature(
+                params_dict)
+            print(payment_id)
+            if result is not None:
+                amount = 20000  # Rs. 200
+                try:
+
+                    # capture the payemt
+                    razorpay_client.payment.capture(payment_id, amount)
+
+                    # render success page on successful caputre of payment
+
+                    return HttpResponse('success')
+                except:
+
+                    # if there is an error while capturing payment.
+                    resp_body = '<script>alert("payment failed...");\
+                                                                     </script>'
+                    return HttpResponse(resp_body)
+            else:
+
+                # if signature verification fails.
+                resp_body = '<script>alert("payment failed...");\
+                                                    </script>'
+                return HttpResponse(resp_body)
+        except:
+
+            # if we don't find the required parameters in POST data
+            return HttpResponseBadRequest()
+    else:
+        # if other than POST request is made.
+        return HttpResponseBadRequest()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

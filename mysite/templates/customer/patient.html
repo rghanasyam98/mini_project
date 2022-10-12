@@ -1,64 +1,165 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
-</head>
+{% include "customer_header.html" %}
 
-<body>
-<form action="{% url 'getmemberdata'  %}" method="post">
+
+
+
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
+<!--<title>Untitled Document</title>-->
+<!--</head>-->
+
+<!--<body>-->
+
+<!-- From template-->
+
+<div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+
+                         <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <strong>Member Registration</strong>
+                                    </div>
+                                    <div class="card-body card-block">
+
+
+
+
+
+
+<form action="{% url 'getmemberdata'  %}" method="post"  class="form-horizontal">
                    {% csrf_token %}
-  
-    <div align="center">
-      <table width="424" height="445" border="1">
-        <tr>
-          <td width="157"><div align="center">Name</div></td>
-          <td width="251"><label for="pname"></label>
-            <div align="center">
-              <input type="text" name="pname" id="pname" required pattern="[A-Z a-z.]{3,25}" />
-          </div></td>
-        </tr>
-        <tr>
-          <td><div align="center">Age</div></td>
-          <td><div align="center">
-            <label for="pAge"></label>
-            <input type="text" name="pAge" id="pAge" required />
-          </div></td>
-        </tr>
-        <tr>
-          <td><div align="center">Gender</div></td>
-          <td><p align="center">
-            <label>
-              <input type="radio" name="gender" value="Male" id="RadioGroup1_0" required />
-              Male</label>
-            <br />
-            <label>
-              <input type="radio" name="gender" value="Female" id="RadioGroup1_1" required />
-              Female</label>
-            <br />
-          </p></td>
-        </tr>
-        <tr>
-          <td><div align="center">Place</div></td>
-          <td><div align="center">
-            <label for="place"></label>
-            <input type="text" name="place" id="place" required />
-          </div></td>
-        </tr>
-        <tr><td><div align="center">Phone</div></td>
-               <td> <div class="form-outline mb-4" align="center">
-                  <input type="text" id="form3Example90" class="form-control form-control-lg" name="phone" required  pattern="[0-9]{10}" />
-                  
-                </div></td>
-       </tr>
-        <tr>
-        <td height="42" colspan="2"><div align="center">
-          <input type="submit" name="next" id="next" value="Add" />
-        </div></td>
-        </tr>
-      </table>
-    </div>
-</form>
 
-</body>
-</html>
+<!--    <div class="row form-group">-->
+<!--                                                <div class="col col-md-3">-->
+<!--                                                    <label for="text-input" class=" form-control-label">Text Input</label>-->
+<!--                                                </div>-->
+<!--                                                <div class="col-12 col-md-9">-->
+<!--                                                    <input type="text" id="text-input" name="text-input" placeholder="Text" class="form-control">-->
+<!--                                                    <small class="form-text text-muted">This is a help text</small>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+
+
+    <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="pname" class=" form-control-label">Name</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                     <input type="text" name="pname" id="pname" required pattern="[A-Z a-z.]{3,25}" class="form-control" placeholder="Patient Name" />
+                                                    <small class="form-text text-muted">This is a help text</small>
+                                                </div>
+                                            </div>
+
+
+        <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="pAge" class=" form-control-label">Age</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                      <input type="text" name="pAge" id="pAge"class="form-control" placeholder="Patient Age"  required />
+                                                    <small class="form-text text-muted">This is a help text</small>
+                                                </div>
+                                            </div>
+
+
+
+            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label class=" form-control-label">Gender</label>
+                                                </div>
+
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label class=" form-control-label"></label>
+                                                </div>
+                                                <div class="col col-md-9">
+                                                    <div class="form-check-inline form-check">
+                                                        <label for="RadioGroup1_0" class="form-check-label ">
+
+                                                             <input type="radio" name="gender" value="Male" id="RadioGroup1_0"  class="form-check-input" required /> Male
+
+                                                        </label>
+                                                        <label  for="RadioGroup1_1" class="form-check-label ">
+
+                                                             <input type="radio" name="gender" value="Female" id="RadioGroup1_1" class="form-check-input"  required /> Female
+                                                         </label>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+            </div>
+
+ <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="place" class=" form-control-label"> Place</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+
+                                                    <input type="text" name="place" id="place"  class="form-control" placeholder="Place" required />
+                                                    <small class="form-text text-muted">This is a help text</small>
+                                                </div>
+                                            </div>
+
+
+     <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="form3Example90" class=" form-control-label">  Phone</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+
+                                                    <input type="text" id="form3Example90" class="form-control" placeholder="Mob" name="phone" required  pattern="[0-9]{10}" />
+                                                    <small class="form-text text-muted">This is a help text</small>
+                                                </div>
+                                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  
+
+
+
+
+
+
+                                 <div>
+                                    <div class="card-footer" align="center">
+                                         <input type="submit" name="next" id="next" value="Add"  class="btn btn-primary btn-sm" />
+
+
+
+                                    </div>
+                                </div>
+
+                    </form>
+
+
+                     </div>
+        </div>
+
+                         </div>
+
+
+{% include "admin_footer.html" %}
+<!--</body>-->
+<!--</html>-->

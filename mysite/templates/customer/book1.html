@@ -1,70 +1,195 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
-</head>
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
+<!--<title>Untitled Document</title>-->
+<!--</head>-->
 
-<body>
-<form action="{% url 'book2'  %}" method="post">
-                   {% csrf_token %}
-  <div align="center">
-    <table width="407" height="184" border="1">
-      <tr>
-        <th width="190" height="118"><div align="center">Select Patient</div></th>
-        <th width="201"><div align="center">
-          <label for="patient"></label>
-          <select name="patient2" id="patient" required>
-            {% for x in member %}
-            <option value="{{ x.id }}">{{ x.pname }}</option>
-            {% endfor %}
+<!--<body>-->
+
+{% include "customer_header.html" %}
 
 
-          </select>
-        </div></th>
-      </tr>
+<div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
 
-      <tr>
-        <th width="190" height="118"><div align="center">Select Date</div></th>
-        <th width="201"><div align="center">
-          <label for="patient"></label>
-          <select name="bdate" id="bdate" required >
-            {% for x in bdays %}
-            <option value="{{ x.id }}">{{ x.date }}</option>
-            {% endfor %}
+                         <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <strong>Booking Page 1</strong>
+                                    </div>
+                                    <div class="card-body card-block">
+                                   <form action="{% url 'book2'  %}" method="post" class="form-horizontal">
+                                       {% csrf_token %}
 
-
-          </select>
-        </div></th>
-      </tr>
-
-       <tr>
-        <th width="190" height="118"><div align="center">Select Category</div></th>
-        <th width="201"><div align="center">
-          <label for="patient"></label>
-          <select name="cat" id="cat" required>
-            {% for x in catgry %}
-            <option value="{{ x.id }}">{{ x.name }}</option>
-            {% endfor %}
+                                  <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="patient" class=" form-control-label">Select Patient</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
 
 
-          </select>
-        </div></th>
-      </tr>
-      <tr>
-        <td height="58" colspan="2"><div align="center">
-          <input type="submit" name="submit" id="submit" value="Next" class="btn btn-primary" />
-        </div></td>
-      </tr>
-  </table>
-  </div>
+                                                  <select name="patient2" id="patient" class="form-control" required>
+                                                       {% for x in member %}
+                                                              <option value="{{ x.id }}">{{ x.pname }}</option>
+                                                       {% endfor %}
 
-<!--  <div class="form-outline">-->
-<!--  <input type="text" id="typeText" class="form-control" />-->
-<!--  <label class="form-label" for="typeText">Text input</label>-->
-<!--</div>-->
 
-</form>
+                                                   </select>
 
-</body>
-</html>
+
+
+
+                                                </div>
+                                  </div>
+
+
+                                     <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="bdate" class=" form-control-label">Select Date</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+
+                                                   <select name="bdate" id="bdate" class="form-control" required >
+                                                     {% for x in bdays %}
+                                                           <option value="{{ x.id }}">{{ x.date }}</option>
+                                                     {% endfor %}
+
+
+                                                    </select>
+
+
+
+
+
+
+
+                                                </div>
+                                  </div>
+
+
+                                         <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="bdate" class=" form-control-label">Select Department</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+
+                                                   <select name="cat" id="cat" class="form-control" required>
+                                                        {% for x in catgry %}
+                                                           <option value="{{ x.id }}">{{ x.name }}</option>
+                                                        {% endfor %}
+
+
+                                                    </select>
+
+
+
+
+
+
+
+
+                                                </div>
+                                  </div>
+
+
+                                     <div>
+                                    <div class="card-footer" align="center">
+
+                                       <input type="submit" name="submit" id="submit" value="Next" class="btn btn-primary btn-sm" />
+
+
+
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+
+
+
+
+                               </form>
+
+
+                     </div>
+        </div>
+
+                         </div>
+
+
+
+
+
+
+
+<!--<form action="{% url 'book2'  %}" method="post">-->
+<!--                   {% csrf_token %}-->
+<!--  <div align="center">-->
+<!--    <table width="407" height="184" border="1">-->
+<!--      <tr>-->
+<!--        <th width="190" height="118"><div align="center">Select Patient</div></th>-->
+<!--        <th width="201"><div align="center">-->
+<!--          <label for="patient"></label>-->
+<!--          <select name="patient2" id="patient" required>-->
+<!--            {% for x in member %}-->
+<!--            <option value="{{ x.id }}">{{ x.pname }}</option>-->
+<!--            {% endfor %}-->
+
+
+<!--          </select>-->
+<!--        </div></th>-->
+<!--      </tr>-->
+
+<!--      <tr>-->
+<!--        <th width="190" height="118"><div align="center">Select Date</div></th>-->
+<!--        <th width="201"><div align="center">-->
+<!--          <label for="patient"></label>-->
+<!--          <select name="bdate" id="bdate" required >-->
+<!--            {% for x in bdays %}-->
+<!--            <option value="{{ x.id }}">{{ x.date }}</option>-->
+<!--            {% endfor %}-->
+
+
+<!--          </select>-->
+<!--        </div></th>-->
+<!--      </tr>-->
+
+<!--       <tr>-->
+<!--        <th width="190" height="118"><div align="center">Select Category</div></th>-->
+<!--        <th width="201"><div align="center">-->
+<!--          <label for="patient"></label>-->
+<!--          <select name="cat" id="cat" required>-->
+<!--            {% for x in catgry %}-->
+<!--            <option value="{{ x.id }}">{{ x.name }}</option>-->
+<!--            {% endfor %}-->
+
+
+<!--          </select>-->
+<!--        </div></th>-->
+<!--      </tr>-->
+<!--      <tr>-->
+<!--        <td height="58" colspan="2"><div align="center">-->
+<!--          <input type="submit" name="submit" id="submit" value="Next" class="btn btn-primary" />-->
+<!--        </div></td>-->
+<!--      </tr>-->
+<!--  </table>-->
+<!--  </div>-->
+
+<!--&lt;!&ndash;  <div class="form-outline">&ndash;&gt;-->
+<!--&lt;!&ndash;  <input type="text" id="typeText" class="form-control" />&ndash;&gt;-->
+<!--&lt;!&ndash;  <label class="form-label" for="typeText">Text input</label>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+<!--</form>-->
+
+
+{% include "admin_footer.html" %}
+
+<!--</body>-->
+<!--</html>-->

@@ -52,7 +52,7 @@
                                 <td align="center">{{ s.end }}</td>
                                 <td align="center">{{ s.t2 }}</td>
                                    <td align="center">{{ s.strength }}</td>
-                                 <td align="center"> <a href="{% url 'updateslot' s.id %}">Edit</a>&nbsp;<a href="{% url 'deleteslot' s.id %}">Delete</a></td>
+                                 <td align="center"> <a  href="{% url 'updateslot' s.id %}">Edit</a>&nbsp;<a onclick="return confirm('Are you sure?')" href="{% url 'deleteslot' s.id %}">Delete</a></td>
                               </tr>
 
                       {% endfor %}
@@ -115,7 +115,7 @@ $(document).ready(function() {
             k+= '<td align="center">' + mainObj[i]["fields"]["end"] + '</td>';
             k+= '<td align="center">' + mainObj[i]["fields"]["t2"] + '</td>';
             k+= '<td align="center">' + mainObj[i]["fields"]["strength"] + '</td>';
-            k+= '<td align="center"> <a href="/updateslot/'+mainObj[i]["pk"]+'">Edit </a> <a href="/deleteslot/'+mainObj[i]["pk"]+'">Delete</a> ';
+            k+= '<td align="center"> <a  href="/updateslot/'+mainObj[i]["pk"]+'">Edit </a> <a onclick="return confirm(\'Are you sure?\')" href="/deleteslot/'+mainObj[i]["pk"]+'">Delete</a> ';
 
 
 

@@ -19,7 +19,8 @@ urlpatterns = [
      path('gotoslotpage', views.gotoslotpage, name="gotoslotpage"),
      path('bookingsummary/<int:bksid>/', views.bookingsummary, name="bookingsummary"),
      path('bookingcompleted', views.bookingcompleted, name="bookingcompleted"),
-
+     path('paymenthandler', views.paymenthandler, name="paymenthandler"),
+     path('home', views.home, name="home"),
 
 
 

@@ -1,20 +1,28 @@
+{% include "customer_header.html" %}
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
+<!--<title>Untitled Document</title>-->
+<!--</head>-->
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
-</head>
+<!--<body>-->
 
-<body>
-
-<br><br><br>
+<!--<br><br><br>-->
 <form action="{% url 'addmember' %}" method="post">
                    {% csrf_token %}
   <div align="center">
-  <input name="" type="submit" id="addnew" value="Add member" />
-    <table border="1" width="500">
+  <input name="" type="submit" id="addnew" value="Add member"  class="btn btn-primary" />
 
+    <div class="row m-t-30">
+                            <div class="col-md-12">
+                                <!-- DATA TABLE-->
+                                <div class="table-data3">
+
+
+
+    <table border="1" width="1000"  class="table-primary" >
+    <thead>
       <tr>
         <th>Name</th>
         <th>Age </th>
@@ -23,25 +31,27 @@
         <th>Phone</th>
           <th></th>
       </tr>
-
-
+    </thead>
+   <tbody>
       {% for p in member %}
-      <tr >
+      <tr class="tr-shadow" >
         <td><div align="center">{{ p.pname }}</div></td>
         <td><div align="center">{{ p.age }}</div></td>
         <td><div align="center">{{ p.gender }}</div></td>
       
         <td><div align="center">{{ p.place }}</div></td>
         <td><div align="center">{{ p.phone }}</div></td>
-          <td><div align="center"><a href="{% url 'deletemember' p.id %}">Remove member</a></div></td>
+          <td><div align="center"><a onclick="return confirm('Are you sure?')" href="{% url 'deletemember' p.id %}">Remove member</a></div></td>
       </tr>
-       {% endfor %}
 
+       {% endfor %}
+</tbody>
   </table>
   </div>
 
 </form>
 
-</body>
+<!--</body>-->
 
-</html>
+<!--</html>-->
+{% include "admin_footer.html" %}

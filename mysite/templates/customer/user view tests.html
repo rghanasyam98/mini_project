@@ -1,32 +1,41 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
-<style>.divider:after,
-.divider:before {
-content: "";
-flex: 1;
-height: 1px;
-background: #eee;
-}</style>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-</head>
+{% include "customer_header.html" %}
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
+<!--<title>Untitled Document</title>-->
+<!--<style>.divider:after,-->
+<!--.divider:before {-->
+<!--content: "";-->
+<!--flex: 1;-->
+<!--height: 1px;-->
+<!--background: #eee;-->
+<!--}</style>-->
+<!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">-->
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>-->
+<!--</head>-->
 
-<body>
+<!--<body>-->
 
-</form>
+
 <!-- Default form register -->
 <form action="" method="post" name="test">
 <div align="right"><select name="category" id="category">
   {% for cat in catgry %}
-  <option value="{{cat.id}}">{{cat.name}}</option>
+  <option value="{{cat.id}}"   {% if cat.id == caty.id %} selected  {% endif %} >{{cat.name}}</option>
   {% endfor %}}
 </select></div>
 <div align="center">
-  <table class="table">
-    <thead class="table-dark">
+
+   <div class="row m-t-30">
+                            <div class="col-md-12">
+                                <!-- DATA TABLE-->
+                                <div class="table-data3">
+
+
+
+  <table class="table-primary">
+    <thead >
       <tr>
         <th width="62" height="77"><div align="center">Sl No</div></th>
         <th width="485"><div align="center">Test Name</div></th>
@@ -37,11 +46,11 @@ background: #eee;
     <tbody id="tableData">
       
     {% for t in test %}
-  <tr>
-    <td>{{ forloop.counter }}</td>
-    <td>{{ t.name }}</td>
-    <td>{{ t.des }}</td>
-    <td>{{ t.price }}</td>
+  <tr  class="tr-shadow">
+    <td><div align="center">{{ forloop.counter }}</td>
+    <td><div align="center">{{ t.name }}</td>
+    <td><div align="center">{{ t.des }}</td>
+    <td><div align="center">{{ t.price }}</td>
 
   </tr>
   {% endfor %}
@@ -53,10 +62,10 @@ background: #eee;
 
 
 </form>
-</div>
 
-</body>
-</html>
+
+<!--</body>-->
+<!--</html>-->
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -101,10 +110,10 @@ $(document).ready(function() {
         for(i = 0;i < mainObj.length; i++){
 
             k+= '<tr>';
-            k+= '<td>'+  (i+1) + '</td>'
-            k+= '<td>' + mainObj[i]["fields"]["name"] + '</td>';
-            k+= '<td>' + mainObj[i]["fields"]["des"] + '</td>';
-            k+= '<td>' + mainObj[i]["fields"]["price"] + '</td>';
+            k+= '<td><div align="center">'+  (i+1) + '</td>'
+            k+= '<td><div align="center">' + mainObj[i]["fields"]["name"] + '</td>';
+            k+= '<td><div align="center">' + mainObj[i]["fields"]["des"] + '</td>';
+            k+= '<td><div align="center">' + mainObj[i]["fields"]["price"] + '</td>';
 
             k+= '</tr>';
         }
@@ -113,3 +122,4 @@ $(document).ready(function() {
 }
 
 </script>
+{% include "admin_footer.html" %}

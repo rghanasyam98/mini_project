@@ -1,76 +1,215 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
-</head>
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
+<!--<title>Untitled Document</title>-->
+<!--</head>-->
 
-<body>
+<!--<body>-->
+{% include "customer_header.html" %}
 
-<form action="{% url 'getupdatedprofile' %}" method="post" name="update profile">
-  {% csrf_token %}
-  <div align="center">
-    <table width="579" border="1">
-      <tr>
-        <td width="132" height="62"><div align="center">Name</div></td>
-        <td width="431"><label for="name"></label>
-          <div align="center">
-            <input type="text" name="name" id="name" value="{{ usr.name }}" required  pattern="[A-Z a-z.]{3,25}"/>
-        </div></td>
-      </tr>
-      <tr>
-        <td height="72"><div align="center">Address</div></td>
-        <td><label for="addr"></label>
-          <div align="center">
-            <textarea name="addr" id="addr" cols="45" rows="5" required >{{ usr.address }}</textarea>
-        </div></td>
-      </tr>
 
-      <tr>
-        <td height="72"><div align="center">Gender</div></td>
-        <td><p align="center"><br />
-          </p>
-          <p>
-            <label>
-              <input type="radio" name="gender" value="male" id="RadioGroup1_0" {% if p1 == 1 %} checked="checked"{% endif %} required />
-              Male</label>
-            <br />
-            <label>
-              <input type="radio" name="gender" value="female" id="RadioGroup1_1" {% if p1 == 0 %} checked="checked"{% endif %} required />
-              Female</label>
-            <br />
-          </p>
-        <p align="center">&nbsp;</p></td>
-      </tr>
-      <tr>
-        <td height="71"><div align="center">Phone</div></td>
-        <td><label for="phone"></label>
-          <div align="center">
-            <input type="text" name="mob" id="phone" value="{{ usr.phone }}" required  pattern="[0-9]{10}" />
-        </div></td>
-      </tr>
-      <tr>
-        <td height="61"><div align="center">Email</div></td>
-        <td><label for="email"></label>
-          <div align="center">
-            <input type="email" name="email" id="email" value="{{ useremail.email }}" required />
-        </div></td>
-      </tr>
-      <tr>
-        <td height="56"><div align="center">Password</div></td>
-        <td><div align="center">
-          <label for="password"></label>
-          <input type="password" name="pwd" id="password" required />
-        </div></td>
-      </tr>
-      <tr>
-        <td height="56" colspan="2"><div align="center">
-          <input type="submit" name="updateprofile" id="updateprofile" value="Update" />
-        </div></td>
-      </tr>
-  </table>
-  </div>
 
-</form>
-</body>
-</html>
+<!-- editing from template-->
+
+<div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+
+                         <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <strong>Update Profile</strong>
+                                    </div>
+                                    <div class="card-body card-block">
+
+
+                               <form action="{% url 'getupdatedprofile' %}" method="post" name="update profile" class="form-horizontal">
+                                 {% csrf_token %}
+
+
+
+
+                                       <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="name" class=" form-control-label">Name</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+
+                                                  <input type="text" name="name" id="name" value="{{ usr.name }}"  class="form-control" required  pattern="[A-Z a-z.]{3,25}"/>
+                                                    <small class="form-text text-muted">This is a help text</small>
+                                                </div>
+                                            </div>
+
+
+                                 <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="addr" class=" form-control-label">Textarea</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+
+
+                                                  <textarea name="addr" id="addr" cols="45" rows="9" placeholder="Content..." class="form-control" required >{{ usr.address }}</textarea>
+                                                </div>
+                                            </div>
+
+
+
+
+                                  <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label class=" form-control-label">Gender</label>
+                                                </div>
+
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label class=" form-control-label"></label>
+                                                </div>
+                                                <div class="col col-md-9">
+                                                    <div class="form-check-inline form-check">
+                                                        <label for="RadioGroup1_0" class="form-check-label ">
+
+                                                            <input type="radio" name="gender" value="male" id="RadioGroup1_0" {% if p1 == 1 %} checked="checked"{% endif %} required />Male
+
+                                                        </label>
+                                                        <label  for="RadioGroup1_1" class="form-check-label ">
+
+                                                             <input type="radio" name="gender" value="female" id="RadioGroup1_1" {% if p1 == 0 %} checked="checked"{% endif %} required /> Female
+                                                         </label>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+            </div>
+
+
+
+                                 <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="phone" class=" form-control-label">Phone</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+
+                                                   <input type="text" name="mob" id="phone" value="{{ usr.phone }}" class="form-control" required  pattern="[0-9]{10}" />
+                                                    <small class="form-text text-muted">This is a help text</small>
+                                                </div>
+                                            </div>
+
+
+                                  <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="email" class=" form-control-label">Email</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+
+                                                    <input type="email" name="email" id="email" value="{{ useremail.email }}"  class="form-control" required />
+                                                    <small class="form-text text-muted">This is a help text</small>
+                                                </div>
+                                            </div>
+
+
+                                  <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="password" class=" form-control-label">Password</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+
+                                                    <input type="password" name="pwd" id="password" class="form-control" required />
+                                                    <small class="form-text text-muted">This is a help text</small>
+                                                </div>
+                                            </div>
+
+
+                                 <div>
+                                    <div class="card-footer" align="center">
+
+                                      <input type="submit" name="updateprofile" id="updateprofile" value="Update" class="btn btn-primary btn-sm" />
+
+
+
+                                    </div>
+                                </div>
+
+                    </form>
+
+
+                     </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+<!--<form action="{% url 'getupdatedprofile' %}" method="post" name="update profile">-->
+<!--  {% csrf_token %}-->
+<!--  <div align="center">-->
+<!--    <table width="579" border="1">-->
+<!--      <tr>-->
+<!--        <td width="132" height="62"><div align="center">Name</div></td>-->
+<!--        <td width="431"><label for="name"></label>-->
+<!--          <div align="center">-->
+<!--            <input type="text" name="name" id="name" value="{{ usr.name }}" required  pattern="[A-Z a-z.]{3,25}"/>-->
+<!--        </div></td>-->
+<!--      </tr>-->
+<!--      <tr>-->
+<!--        <td height="72"><div align="center">Address</div></td>-->
+<!--        <td><label for="addr"></label>-->
+<!--          <div align="center">-->
+<!--            <textarea name="addr" id="addr" cols="45" rows="5" required >{{ usr.address }}</textarea>-->
+<!--        </div></td>-->
+<!--      </tr>-->
+
+<!--      <tr>-->
+<!--        <td height="72"><div align="center">Gender</div></td>-->
+<!--        <td><p align="center"><br />-->
+<!--          </p>-->
+<!--          <p>-->
+<!--            <label>-->
+<!--              <input type="radio" name="gender" value="male" id="RadioGroup1_0" {% if p1 == 1 %} checked="checked"{% endif %} required />-->
+<!--              Male</label>-->
+<!--            <br />-->
+<!--            <label>-->
+<!--              <input type="radio" name="gender" value="female" id="RadioGroup1_1" {% if p1 == 0 %} checked="checked"{% endif %} required />-->
+<!--              Female</label>-->
+<!--            <br />-->
+<!--          </p>-->
+<!--        <p align="center">&nbsp;</p></td>-->
+<!--      </tr>-->
+<!--      <tr>-->
+<!--        <td height="71"><div align="center">Phone</div></td>-->
+<!--        <td><label for="phone"></label>-->
+<!--          <div align="center">-->
+<!--            <input type="text" name="mob" id="phone" value="{{ usr.phone }}" required  pattern="[0-9]{10}" />-->
+<!--        </div></td>-->
+<!--      </tr>-->
+<!--      <tr>-->
+<!--        <td height="61"><div align="center">Email</div></td>-->
+<!--        <td><label for="email"></label>-->
+<!--          <div align="center">-->
+<!--            <input type="email" name="email" id="email" value="{{ useremail.email }}" required />-->
+<!--        </div></td>-->
+<!--      </tr>-->
+<!--      <tr>-->
+<!--        <td height="56"><div align="center">Password</div></td>-->
+<!--        <td><div align="center">-->
+<!--          <label for="password"></label>-->
+<!--          <input type="password" name="pwd" id="password" required />-->
+<!--        </div></td>-->
+<!--      </tr>-->
+<!--      <tr>-->
+<!--        <td height="56" colspan="2"><div align="center">-->
+<!--          <input type="submit" name="updateprofile" id="updateprofile" value="Update" />-->
+<!--        </div></td>-->
+<!--      </tr>-->
+<!--  </table>-->
+<!--  </div>-->
+
+<!--</form>-->
+
+{% include "admin_footer.html" %}
+<!--</body>-->
+<!--</html>-->

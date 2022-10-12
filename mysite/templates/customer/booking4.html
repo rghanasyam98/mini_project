@@ -1,65 +1,144 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
-</head>
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
+<!--<title>Untitled Document</title>-->
+<!--</head>-->
 
-<body align=""center>
-<form action="" method="get">
-<div align="center">
-  <table width="679" height="537" border="1">
-    <tr>
-      <td width="226"><div align="center">Patient Name</div></td>
-      <td colspan="2"><div align="center">{{ pat.pname }}</div></td>
-      </tr>
-    <tr>
-    <tr>
-      <td width="226"><div align="center">Date</div></td>
-      <td colspan="2"><div align="center">{{ bkdate.date }} </div></td>
-      </tr>
-    <tr>
-      <td><div align="center">Slot</div></td>
-      <td colspan="2"><div align="center"> {{ bkslot.start }} {{ bkslot.t1 }} - {{ bkslot.end }} {{ bkslot.t2 }}  </div></td>
-      </tr>
-<!--    <tr>-->
-<!--      <td><div align="center">Token</div></td>-->
-<!--      <td colspan="2"><div align="center"></div></td>-->
-<!--      </tr>-->
+<!--<body align=""center>-->
+{% include "customer_header.html" %}
 
 
+<form action="{% url 'home' %}" method="post">
+  {% csrf_token %}
 
-      {% for i in testdata %}
-    {% for x in listoftests %}
+<div class="col-md-4">
+                                <aside class="profile-nav alt">
+                                    <section class="card">
+                                        <div class="card-header user-header alt bg-dark">
+                                            <div class="media">
+
+                                                <div class="media-body">
+                                                    <h3 class="text-light display-6">Booking Summary</h3>
+<!--                                                    <p>Project Manager</p>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                      <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+
+                                                    <i class="fa fa-envelope-o">Patient Name : {{ pat.pname }}</i>
+<!--                                                    <span class="badge badge-primary pull-right">10</span>-->
+
+                                            </li>
+
+                                            <li class="list-group-item">
+
+                                                    <i class="bi bi-calendar-day-fill"> Date : {{ bkdate.date }}</i>
+<!--                                                    <span class="badge badge-primary pull-right">10</span>-->
+
+                                            </li>
+                                            <li class="list-group-item">
+
+                                                    <i class="">  Slot : {{ bkslot.start }} {{ bkslot.t1 }} - {{ bkslot.end }} {{ bkslot.t2 }}</i>
+<!--                                                    <span class="badge badge-danger pull-right">15</span>-->
+
+                                            </li>
+
+                                            <li class="list-group-item">
+                                               {% for i in testdata %}
+                                                      {% for x in listoftests %}
+                                                          {% if x.tests_id == i.id %}
+                                                             <i class="fa fa-bell-o"> Test {{ forloop.counter }} : {{ i.name }},  </i>
+
+                                                          {% endif %}
+
+                                                      {% endfor %}
+                                               {% endfor %}
 
 
-      {% if x.tests_id == i.id %}
-    <tr><td><div align="center">Test {{ forloop.counter }}</div></td>
-      <td width="210"><div align="center"> {{ i.name }}</div></td>
-<!--      <td width="221"><div align="center"><a href="" >Remove item</a></div></td>-->
+<!--                                                    <span class="badge badge-success pull-right">11</span>-->
 
+                                            </li>
+                                            <li class="list-group-item">
 
+                                                    <i class="fa fa-comments-o">Total Amount : {{ sum }}</i>
+<!--                                                    <span class="badge badge-warning pull-right r-activity">03</span>-->
 
-      </tr>
-     {% endif %}
-    {% endfor %}
-    {% endfor %}
+                                            </li>
 
-    <tr>
-      <td><div align="center">Total Amount</div></td>
-      <td colspan="2"><div align="center">{{ sum }}</div></td>
-      </tr>
-    <tr>
-      <td colspan="3"><div align="center">
-        <input type="submit" name="payment" id="payment" value="Proceed to Payment" />
-      </div></td>
-      </tr>
-  </table>
-</div>
-<div align="center"></div>
-<div align="center"></div>
+                                        <li class="list-group-item">
+                                             <div align="center">
+                                                    <i class="fa fa-comments-o"><input type="submit" name="payment" id="payment" value="Proceed to Payment" class="btn btn-primary" /></i>
+<!--                                                    <span class="badge badge-warning pull-right r-activity">03</span>-->
+                                               </div>
+                                            </li>
+                                        </ul>
+
+                                    </section>
+                                </aside>
+                            </div>
+
 
 
 </form>
-</body>
-</html>
+
+
+<!--<form action="" method="get">-->
+<!--<div align="center">-->
+<!--  <table width="679" height="537" border="1">-->
+<!--    <tr>-->
+<!--      <td width="226"><div align="center">Patient Name</div></td>-->
+<!--      <td colspan="2"><div align="center">{{ pat.pname }}</div></td>-->
+<!--      </tr>-->
+<!--    <tr>-->
+<!--    <tr>-->
+<!--      <td width="226"><div align="center">Date</div></td>-->
+<!--      <td colspan="2"><div align="center">{{ bkdate.date }} </div></td>-->
+<!--      </tr>-->
+<!--    <tr>-->
+<!--      <td><div align="center">Slot</div></td>-->
+<!--      <td colspan="2"><div align="center"> {{ bkslot.start }} {{ bkslot.t1 }} - {{ bkslot.end }} {{ bkslot.t2 }}  </div></td>-->
+<!--      </tr>-->
+<!--&lt;!&ndash;    <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;      <td><div align="center">Token</div></td>&ndash;&gt;-->
+<!--&lt;!&ndash;      <td colspan="2"><div align="center"></div></td>&ndash;&gt;-->
+<!--&lt;!&ndash;      </tr>&ndash;&gt;-->
+
+
+
+<!--      {% for i in testdata %}-->
+<!--    {% for x in listoftests %}-->
+
+
+<!--      {% if x.tests_id == i.id %}-->
+<!--    <tr><td><div align="center">Test {{ forloop.counter }}</div></td>-->
+<!--      <td width="210"><div align="center"> {{ i.name }}</div></td>-->
+<!--&lt;!&ndash;      <td width="221"><div align="center"><a href="" >Remove item</a></div></td>&ndash;&gt;-->
+
+
+
+<!--      </tr>-->
+<!--     {% endif %}-->
+<!--    {% endfor %}-->
+<!--    {% endfor %}-->
+
+<!--    <tr>-->
+<!--      <td><div align="center">Total Amount</div></td>-->
+<!--      <td colspan="2"><div align="center">{{ sum }}</div></td>-->
+<!--      </tr>-->
+<!--    <tr>-->
+<!--      <td colspan="3"><div align="center">-->
+<!--        <input type="submit" name="payment" id="payment" value="Proceed to Payment" />-->
+<!--      </div></td>-->
+<!--      </tr>-->
+<!--  </table>-->
+<!--</div>-->
+<!--<div align="center"></div>-->
+<!--<div align="center"></div>-->
+
+
+
+<!--</body>-->
+<!--</html>-->
+                                      {% include "admin_footer.html" %}

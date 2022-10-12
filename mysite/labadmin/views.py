@@ -71,6 +71,7 @@ def date_management(request):
     dd=Working_days.objects.filter(dayonly_id=topdate)
     # dd=Day.objects.select_related('category')
     current_date = datetime.date.today()
+    available_days = Daytbl.objects.filter(date__gte=datetime.date.today())
     # print(current_date)
     # d=Day.objects.all(date_gte = current_date).distinct()
     # d = Day.objects.all().distinct()

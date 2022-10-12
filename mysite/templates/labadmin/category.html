@@ -48,7 +48,7 @@
       <tr>
           <td> <div align="center">{{forloop.counter}}</div>
          </td>
-          <td> <div align="center"> {{cat.name}} </div></td><td><a href="{% url 'deletecat' cat.id %}">Delete</a> </td>
+          <td> <div align="center"> {{cat.name}} </div></td><td><a onclick="return confirm('Are you sure?')" href="{% url 'deletecat' cat.id %}">Delete</a> </td>
       </tr>
        {% endfor %}
         </tbody>

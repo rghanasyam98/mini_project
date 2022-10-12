@@ -110,7 +110,7 @@ $(document).ready(function() {
             k+= '<td  align="center">' + mainObj[i]["fields"]["price"] + '</td>';
             k+= '<td  align="center">' + mainObj[i]["fields"]["status"] + '</td>';
             k+= '<td  align="center">' + mainObj[i]["fields"]["hstatus"] + '</td>';
-            k+= '<td  align="center"> <a href="/updatetest/'+mainObj[i]["pk"]+'">Edit </a><a href="/deletetest/'+mainObj[i]["pk"]+'">Delete</a> ';
+            k+= '<td  align="center"> <a href="/updatetest/'+mainObj[i]["pk"]+'">Edit </a><a  onclick="return confirm(\'Are you sure?\')"  href="/deletetest/'+mainObj[i]["pk"]+'">Delete</a> ';
             k+= '</tr>';
         }
         k+='</tbody>';

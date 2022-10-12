@@ -1,137 +1,248 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
-<style type="text/css">
-/* The switch - the box around the slider */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
+<!--<title>Untitled Document</title>-->
+<!--<style type="text/css">-->
+<!--/* The switch - the box around the slider */-->
+<!--.switch {-->
+<!--  position: relative;-->
+<!--  display: inline-block;-->
+<!--  width: 60px;-->
+<!--  height: 34px;-->
+<!--}-->
 
-/* Hide default HTML checkbox */
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
+<!--/* Hide default HTML checkbox */-->
+<!--.switch input {-->
+<!--  opacity: 0;-->
+<!--  width: 0;-->
+<!--  height: 0;-->
+<!--}-->
 
-/* The slider */
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
+<!--/* The slider */-->
+<!--.slider {-->
+<!--  position: absolute;-->
+<!--  cursor: pointer;-->
+<!--  top: 0;-->
+<!--  left: 0;-->
+<!--  right: 0;-->
+<!--  bottom: 0;-->
+<!--  background-color: #ccc;-->
+<!--  -webkit-transition: .4s;-->
+<!--  transition: .4s;-->
+<!--}-->
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
+<!--.slider:before {-->
+<!--  position: absolute;-->
+<!--  content: "";-->
+<!--  height: 26px;-->
+<!--  width: 26px;-->
+<!--  left: 4px;-->
+<!--  bottom: 4px;-->
+<!--  background-color: white;-->
+<!--  -webkit-transition: .4s;-->
+<!--  transition: .4s;-->
+<!--}-->
 
-input:checked + .slider {
-  background-color: #2196F3;
-}
+<!--input:checked + .slider {-->
+<!--  background-color: #2196F3;-->
+<!--}-->
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
+<!--input:focus + .slider {-->
+<!--  box-shadow: 0 0 1px #2196F3;-->
+<!--}-->
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
+<!--input:checked + .slider:before {-->
+<!--  -webkit-transform: translateX(26px);-->
+<!--  -ms-transform: translateX(26px);-->
+<!--  transform: translateX(26px);-->
+<!--}-->
 
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
+<!--/* Rounded sliders */-->
+<!--.slider.round {-->
+<!--  border-radius: 34px;-->
+<!--}-->
 
-.slider.round:before {
-  border-radius: 50%;
-}
-</style>
-</head>
+<!--.slider.round:before {-->
+<!--  border-radius: 50%;-->
+<!--}-->
+<!--</style>-->
+<!--</head>-->
 
-<body>
+<!--<body>-->
+{% include "admin_header.html" %}
 
-<form  action="{% url 'getupdatedslotdata'  %}" method="post">
-  {% csrf_token %}
-  <div align="center">
-    <table width="547" height="314" border="1">
+
+
+<!-- editing-->
+<div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+
+                         <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <strong>Update Slot details</strong>
+                                    </div>
+                                    <div class="card-body card-block">
+
+                                      <form  action="{% url 'getupdatedslotdata'  %}" method="post"  class="form-horizontal">
+                                         {% csrf_token %}
+
+
+
+
+
+                                         <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="slot" class=" form-control-label">Test Name</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+
+                                                        <input type="text" name="start" id="slot"  value="{{ slt.start }}" class="form-control" required />
+
+                                                             <select name="t1"  class="form-control" id="t1" required>
+                                                                <option value="AM" {% if p1 == 1 %} selected  {% endif %}>AM</option>
+                                                                <option value="PM" {% if p1 == 0 %} selected  {% endif %}>PM</option>
+                                                              </select>
+                                                    <small class="form-text text-muted">This is a help text</small>
+                                                </div>
+                                            </div>
+
+                                        <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="slot2" class=" form-control-label">Test Name</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+
+                                                    <input type="text" name="end" id="slot2" class="form-control" value="{{ slt.end }}" required />
+                                                  <select name="t2" id="t2"  class="form-control" required>
+                                                        <option value="AM"   {% if p2 == 1 %} selected  {% endif %}>AM</option>
+                                                           <option value="PM"  {% if p2 == 0 %} selected  {% endif %}>PM</option>
+                                                   </select>
+                                                    <small class="form-text text-muted">This is a help text</small>
+                                                </div>
+                                            </div>
+
+
+                                         <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="strength" class=" form-control-label">Test Name</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+
+
+
+                                                     <input type="text" name="strength" id="strength"  value="{{ slt.strength }}" class="form-control"  required/>
+                                                    <small class="form-text text-muted">This is a help text</small>
+                                                </div>
+                                            </div>
+
+
+                                         <div>
+                                    <div class="card-footer" align="center">
+
+<!--                                      <input type="submit" name="updateprofile" id="updateprofile" value="Update" class="btn btn-primary btn-sm" />-->
+
+
+                                        <input name="addslot" type="submit" id="addslot" value="Update" class="btn btn-primary btn-sm" />
+
+
+
+                                    </div>
+                                </div>
+
+                    </form>
+
+
+                     </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+<!-- editing ends -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<form  action="{% url 'getupdatedslotdata'  %}" method="post">-->
+<!--  {% csrf_token %}-->
+<!--  <div align="center">-->
+<!--    <table width="547" height="314" border="1">-->
+
+<!--&lt;!&ndash;      <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;        <td height="55"> <div align="center">Category</div></td>&ndash;&gt;-->
+<!--&lt;!&ndash;      <td><label for="category"></label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div align="center">&ndash;&gt;-->
+<!--&lt;!&ndash;          <select name="category" id="category">&ndash;&gt;-->
+<!--&lt;!&ndash;            {% for cat in catgry %}&ndash;&gt;-->
+<!--&lt;!&ndash;            <option value="{{ cat.id }}"  {% if cat.id == slt.category_id %} selected  {% endif %}>{{cat.name}}</option>&ndash;&gt;-->
+<!--&lt;!&ndash;            {% endfor %}&ndash;&gt;-->
+<!--&lt;!&ndash;          </select>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div></td>&ndash;&gt;-->
+<!--&lt;!&ndash;      </tr>&ndash;&gt;-->
 
 <!--      <tr>-->
-<!--        <td height="55"> <div align="center">Category</div></td>-->
-<!--      <td><label for="category"></label>-->
-<!--        <div align="center">-->
-<!--          <select name="category" id="category">-->
-<!--            {% for cat in catgry %}-->
-<!--            <option value="{{ cat.id }}"  {% if cat.id == slt.category_id %} selected  {% endif %}>{{cat.name}}</option>-->
-<!--            {% endfor %}-->
-<!--          </select>-->
+<!--        <td width="251"> <div align="center">Slot interval start</div></td>-->
+<!--        <td width="280"><div align="center">-->
+<!--          <input type="text" name="start" id="slot"  value="{{ slt.start }}" required />  <select name="t1" id="t1" required>-->
+<!--          <option value="AM" {% if p1 == 1 %} selected  {% endif %}>AM</option>-->
+<!--           <option value="PM" {% if p1 == 0 %} selected  {% endif %}>PM</option>-->
+<!--        </select>-->
 <!--        </div></td>-->
 <!--      </tr>-->
 
-      <tr>
-        <td width="251"> <div align="center">Slot interval start</div></td>
-        <td width="280"><div align="center">
-          <input type="text" name="start" id="slot"  value="{{ slt.start }}" required />  <select name="t1" id="t1" required>
-          <option value="AM" {% if p1 == 1 %} selected  {% endif %}>AM</option>
-           <option value="PM" {% if p1 == 0 %} selected  {% endif %}>PM</option>
-        </select>
-        </div></td>
-      </tr>
-
-      <tr>
-        <td width="251"> <div align="center">Slot interval end</div></td>
-        <td width="280"><div align="center">
-          <input type="text" name="end" id="slot2"  value="{{ slt.end }}" required />
-           <select name="t2" id="t2" required>
-          <option value="AM"   {% if p2 == 1 %} selected  {% endif %}>AM</option>
-           <option value="PM"  {% if p2 == 0 %} selected  {% endif %}>PM</option>
-        </select>
-        </div></td>
-      </tr>
-
-      <tr>
-        <td> <div align="center">Strength</div></td>
-        <td><label for="strength"></label>
-          <div align="center">
-            <input type="text" name="strength" id="strength"  value="{{ slt.strength }}" required/>
-        </div></td>
-      </tr>
 <!--      <tr>-->
-<!--        <td colspan="2"<div align="center">Available Now : &lt;!&ndash; Rounded switch &ndash;&gt;-->
-<!--<label class="switch">-->
-<!--  <div align="center">-->
-<!--    <input type="checkbox" name="slot_status">-->
-<!--    <span class="slider round"></span>-->
-<!--  </div>-->
-<!--</label></div></td>-->
+<!--        <td width="251"> <div align="center">Slot interval end</div></td>-->
+<!--        <td width="280"><div align="center">-->
+<!--          <input type="text" name="end" id="slot2"  value="{{ slt.end }}" required />-->
+<!--           <select name="t2" id="t2" required>-->
+<!--          <option value="AM"   {% if p2 == 1 %} selected  {% endif %}>AM</option>-->
+<!--           <option value="PM"  {% if p2 == 0 %} selected  {% endif %}>PM</option>-->
+<!--        </select>-->
+<!--        </div></td>-->
 <!--      </tr>-->
-      <tr>
-        <td colspan="2"><div align="center"><input name="addslot" type="submit" id="addslot" value="Update" /></div></td>
-      </tr>
-  </table>
-  </div>
 
-</form>
-</body>
-</html>
+<!--      <tr>-->
+<!--        <td> <div align="center">Strength</div></td>-->
+<!--        <td><label for="strength"></label>-->
+<!--          <div align="center">-->
+<!--            <input type="text" name="strength" id="strength"  value="{{ slt.strength }}" required/>-->
+<!--        </div></td>-->
+<!--      </tr>-->
+<!--&lt;!&ndash;      <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;        <td colspan="2"<div align="center">Available Now : &lt;!&ndash; Rounded switch &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;<label class="switch">&ndash;&gt;-->
+<!--&lt;!&ndash;  <div align="center">&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="checkbox" name="slot_status">&ndash;&gt;-->
+<!--&lt;!&ndash;    <span class="slider round"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+<!--&lt;!&ndash;</label></div></td>&ndash;&gt;-->
+<!--&lt;!&ndash;      </tr>&ndash;&gt;-->
+<!--      <tr>-->
+<!--        <td colspan="2"><div align="center"><input name="addslot" type="submit" id="addslot" value="Update" /></div></td>-->
+<!--      </tr>-->
+<!--  </table>-->
+<!--  </div>-->
+
+<!--</form>-->
+{% include "admin_footer.html" %}
+<!--</body>-->
+<!--</html>-->
 

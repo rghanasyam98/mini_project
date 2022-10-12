@@ -146,6 +146,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 LOGIN_URL = '/signin'
 
+RAZOR_KEY_ID = 'rzp_test_RSZJtMVZELUXuf'
+RAZOR_KEY_SECRET = 'cJj9zs9Z50Zspr7pBUjr4MLX'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 

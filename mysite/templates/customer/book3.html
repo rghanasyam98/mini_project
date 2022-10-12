@@ -1,11 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
-</head>
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
+<!--<title>Untitled Document</title>-->
+<!--</head>-->
 
-<body>
+<!--<body>-->
+
+{% include "customer_header.html" %}
+
 <form action="{% url 'book3'  %}" method="post">
   {% csrf_token %}
   <div align="center">
@@ -31,15 +34,26 @@
 <!--  </table>-->
 <!--  </div>-->
 
-    <table id="example" class="display" border="1">
+      <div class="row m-t-30">
+                            <div class="col-md-12">
+                                <!-- DATA TABLE-->
+                                <div class="table-data3">
+
+
+
+
+
+
+    <table id="example" class="table-primary" width="700" border="1">
  <thead>
   <tr>
       <th width="196"><div align="center">SlNo</div></th>
 <!--      <th width="196"><div align="center">Date</div></th>-->
-    <th width="196"><div align="center">Start</div></th>
-    <th width="117"><div align="center">AM/PM</div></th>
-    <th width="187"><div align="center">End</div></th>
-    <th width="193"><div align="center">AM/PM</div></th>
+    <th width="196"><div align="center">Slot</div></th>
+<!--    <th width="117"><div align="center">AM/PM</div></th>-->
+<!--    <th width="187"><div align="center">End</div></th>-->
+<!--    <th width="193"><div align="center">AM/PM</div></th>-->
+       <th width="193"><div align="center"></div></th>
 <!--    <th width="83"><div align="center">Strength</div></th>-->
 <!--    <th width="124"><div align="center">Balance Strength</div></th>-->
 <!--    <th width="112"><div align="center">Status</div></th>-->
@@ -49,20 +63,27 @@
   </thead>
       <tbody>
       {% for i in slt %}
-      <tr>
+      <tr class="tr-shadow">
         <td align="center"> {{ forloop.counter }} </td>
-        <td align="center"> {{ i.start }} </td>
-        <td align="center"> {{ i.t1 }} </td>
-        <td align="center"> {{ i.end }} </td>
-        <td align="center"> {{ i.t2 }} </td>
+        <td align="center"> {{ i.start }} {{ i.t1 }} - {{ i.end }} {{ i.t2 }}  </td>
+<!--        <td align="center"> {{ i.t1 }} </td>-->
+<!--        <td align="center"> {{ i.end }} {{ i.t2 }} </td>-->
+<!--        <td align="center"> {{ i.t2 }} </td>-->
         <td width="129" align="center"><a href="{% url 'bookingsummary' i.id %}">Select this slot</a> </td>
       </tr>
       {% endfor %}
       </tbody>
 
     </table>
+                                    </div>
+                                 </div>
+            </div>
+</div>
 
 
 </form>
-</body>
-</html>
+{% include "admin_footer.html" %}
+
+
+<!--</body>-->
+<!--</html>-->
