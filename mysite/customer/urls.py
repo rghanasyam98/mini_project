@@ -14,8 +14,6 @@ urlpatterns = [
      path('book2', views.book2, name="book2"),
      path('select/<int:tid>/', views.select, name="select"),
      path('book3', views.book3, name="book3"),
-     path('editprofile', views.editprofile, name="editprofile"),
-     path('getupdatedprofile', views.getupdatedprofile, name="getupdatedprofile"),
 
 
 

@@ -98,12 +98,12 @@ input:checked + .slider:before {
       <td height="61" colspan="2">Available Now :</div> <!-- Rounded switch -->
 <label class="switch">
   <div align="center">
-    <input type="checkbox" name="available"  {% if f1 == 1 %} checked="checked" {% endif %} value="true">
+    <input type="checkbox"  {% if f1 == 1 %} checked="checked" {% endif %}>
     <span class="slider round"></span>
   </div>
 </label>  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Home collection : <label class="switch">
   <div align="center">
-    <input type="checkbox" name="home"  {% if f2 == 1 %} checked="checked" {% endif %} value="true">
+    <input type="checkbox"   {% if f2 == 1 %} checked="checked" {% endif %} >
     <span class="slider round"></span>
   </div>
 </label></td>
@@ -114,7 +114,7 @@ input:checked + .slider:before {
         <div align="center">
           <select name="category" id="category">
             {% for cat in catgry %}
-            <option value="{{ cat.id }}" {% if cat.id == test.category_id %} selected  {% endif %}>{{ cat.name }}</option>
+            <option>{{cat.name}}</option>
            {% endfor %}
           </select>
         </div></td>

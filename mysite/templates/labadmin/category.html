@@ -22,19 +22,16 @@
 <form method="post" action="{% url 'addcat' %}" method="post">
                    {% csrf_token %}
 <div align="right"><input name="category" type="text" id="category" align="right" required /><input  type="submit" value="addnew"/></div>
-  <div align="right">
+  <div align="center">
 
-<div>
-    <table id="example" class="display" >
- <thead>
+
+    <table width="347" height="182" border="1">
 
       <tr>
-        <td width="10" height="69">Sl No</td>
-        <td width="100">Category</td>
-        <td width="50"></td>
+        <td width="73" height="69">Sl No</td>
+        <td width="185">Category</td>
+        <td></td>
       </tr>
- </thead>
-        <tbody >
       {% for cat in catgry %}
       <tr>
         <td>{{forloop.counter}}
@@ -42,21 +39,11 @@
         <td>{{cat.name}} </td><td><a href="{% url 'deletecat' cat.id %}">Delete</a> </td>
       </tr>
        {% endfor %}
-        </tbody>
+
   </table>
   </div>
-    </div>
 
 </form>
-
-<script type="text/javascript">
-
-    $(document).ready(function () {
-    $('#example').DataTable();
-
-});
-
-</script>
 {% endblock %}
 <!--</body>-->
 <!--</html>-->

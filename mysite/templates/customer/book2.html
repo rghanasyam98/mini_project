@@ -19,11 +19,11 @@ background: #eee;
 </form>
 <!-- Default form register -->
 <form action="" method="post" name="test">
-<!--<div align="right"><select name="category" id="category">-->
-<!--  {% for cat in catgry %}-->
-<!--  <option value="{{cat.id}}">{{cat.name}}</option>-->
-<!--  {% endfor %}}-->
-<!--</select></div>-->
+<div align="right"><select name="category" id="category">
+  {% for cat in catgry %}
+  <option value="{{cat.id}}">{{cat.name}}</option>
+  {% endfor %}}
+</select></div>
 <div align="center">
   <table class="table">
     <thead class="table-dark">
@@ -64,55 +64,55 @@ background: #eee;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
 
-<!--<script type="text/javascript">-->
+<script type="text/javascript">
 
-<!--$(document).ready(function() {-->
-<!--        $("#category").change(function(){-->
+$(document).ready(function() {
+        $("#category").change(function(){
 
-<!--            id = $('#category option:selected').val();-->
+            id = $('#category option:selected').val();
 
-<!--            let request_url = "{% url 'listcat3' %}";-->
+            let request_url = "{% url 'listcat3' %}";
 
-<!--           $.ajax(-->
-<!--            {-->
-<!--                type:"GET",-->
-<!--                datatype: 'json',-->
-<!--                url: request_url,-->
-<!--                data:{-->
-<!--                         cat_id: id-->
-<!--                },-->
-<!--                success: function( data )-->
-<!--                {-->
-<!--                    tableFromResponse(data);-->
+           $.ajax(
+            {
+                type:"GET",
+                datatype: 'json',
+                url: request_url,
+                data:{
+                         cat_id: id
+                },
+                success: function( data )
+                {
+                    tableFromResponse(data);
 
-<!--                },-->
+                },
 
-<!--      errors: function (e) {-->
+      errors: function (e) {
 
-<!--              }-->
-<!--     })-->
+              }
+     })
 
-<!--        })-->
-<!--    })-->
+        })
+    })
 
-<!--  function tableFromResponse(responseData) {-->
+  function tableFromResponse(responseData) {
 
-<!--        var mainObj = JSON.parse(responseData.testresult);-->
+        var mainObj = JSON.parse(responseData.testresult);
 
-<!--        var k = '<tbody>'-->
+        var k = '<tbody>'
 
-<!--        for(i = 0;i < mainObj.length; i++){-->
+        for(i = 0;i < mainObj.length; i++){
 
-<!--            k+= '<tr>';-->
-<!--            k+= '<td><div align="center">'+  (i+1) + '</td>'-->
-<!--            k+= '<td><div align="center">' + mainObj[i]["fields"]["name"] + '</div></td>';-->
-<!--            k+= '<td><div align="center">' + mainObj[i]["fields"]["des"] + '</div></td>';-->
-<!--            k+= '<td><div align="center">' + mainObj[i]["fields"]["price"] + '</div></td>';-->
-<!--            k+= '<td> <a href="select/'+mainObj[i]["pk"]+'">select</a> ';-->
-<!--            k+= '</tr>';-->
-<!--        }-->
-<!--        k+='</tbody>';-->
-<!--        document.getElementById('tableData').innerHTML = k;-->
-<!--}-->
+            k+= '<tr>';
+            k+= '<td><div align="center">'+  (i+1) + '</td>'
+            k+= '<td><div align="center">' + mainObj[i]["fields"]["name"] + '</div></td>';
+            k+= '<td><div align="center">' + mainObj[i]["fields"]["des"] + '</div></td>';
+            k+= '<td><div align="center">' + mainObj[i]["fields"]["price"] + '</div></td>';
+            k+= '<td> <a href="">Edit </a><a href="select/'+mainObj[i]["pk"]+'">select</a> ';
+            k+= '</tr>';
+        }
+        k+='</tbody>';
+        document.getElementById('tableData').innerHTML = k;
+}
 
-<!--</script>-->
+</script>

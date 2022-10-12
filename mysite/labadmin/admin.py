@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from.models import Patient,Slot,Customer,User,Appointment,Category,Feedback,Home,Info,Order,Payment,Result,Test,Day,Dayonly
+from.models import Patient,Slot,Customer,User,Appointment,Category,Feedback,Home,Info,Order,Payment,Result,Test,Day
 from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
@@ -19,4 +19,3 @@ admin.site.register(Payment)
 admin.site.register(Result)
 admin.site.register(Test)
 admin.site.register(Day)
-admin.site.register(Dayonly)

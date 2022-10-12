@@ -23,34 +23,6 @@
           </select>
         </div></th>
       </tr>
-
-      <tr>
-        <th width="190" height="118"><div align="center">Select Date</div></th>
-        <th width="201"><div align="center">
-          <label for="patient"></label>
-          <select name="bdate" id="bdate">
-            {% for x in member %}
-            <option value=""></option>
-            {% endfor %}
-
-
-          </select>
-        </div></th>
-      </tr>
-
-       <tr>
-        <th width="190" height="118"><div align="center">Select Category</div></th>
-        <th width="201"><div align="center">
-          <label for="patient"></label>
-          <select name="cat" id="cat">
-            {% for x in catgry %}
-            <option value="{{ x.id }}">{{ x.name }}</option>
-            {% endfor %}
-
-
-          </select>
-        </div></th>
-      </tr>
       <tr>
         <td height="58" colspan="2"><div align="center">
           <input type="submit" name="submit" id="submit" value="Next" />

@@ -24,22 +24,21 @@
                    {% csrf_token %}
 <div align="right"><select name="category" id="category">
   {% for cat in catgry %}
-  <option value="{{ cat.id }}"   {% if cat.id == caty.id %} selected  {% endif %}>{{cat.name}}</option>
+  <option value="{{ cat.id }}">{{cat.name}}</option>
   {% endfor %}
 </select></div>
   <br><br>
    <input type="submit" name="addtest" id="addtest" value="Add New" />
 
   <br><br>
- <table id="example" class="display" >
-        <thead>
+<table class="table">
+        <thead class="table-dark">
   <tr>
-    <th width="62" height="57"><div align="center">Sl No</div></th>
+
     <th width="485"><div align="center">Test Name</div></th>
     <th width="505"><div align="center">Description</div></th>
     <th width="153"><div align="center">Price</div></th>
      <th width="153"><div align="center">Status</div></th>
-    <th width="153"><div align="center">Home collection Status</div></th>
     <th width="154"><div align="center">
 
     </div></th>
@@ -48,13 +47,12 @@
 
   <tbody id="tableData">
   {% for t in test %}
-  <tr><td align="center">{{ forloop.counter }}</td>
-    <td align="center">{{ t.name }}</td>
+  <tr>
+    <td>{{ t.name }}</td>
     <td>{{ t.des }}</td>
-    <td align="center">{{ t.price }}</td>
-    <td align="center">{{ t.status }}</td>
-    <td align="center">{{ t.hstatus }}</td>
-     <td align="center"><a href="{% url 'updatetest' t.id %}">Edit</a>&nbsp;<a href="{% url 'deletetest' t.id %}">Delete</a> </td>
+    <td>{{ t.price }}</td>
+    <td>{{ t.status }}</td>
+     <td><a href="{% url 'updatetest' t.id %}">Edit</a>&nbsp;<a href="{% url 'deletetest' t.id %}">Delete</a> </td>
   </tr>
   {% endfor %}
   </tbody>
@@ -109,27 +107,15 @@ $(document).ready(function() {
         for(i = 0;i < mainObj.length; i++){
 
             k+= '<tr>';
-            k+= '<td align="center">'+ (i+1) +'</td>'
-            k+= '<td  align="center">' + mainObj[i]["fields"]["name"] + '</td>';
-            k+= '<td  align="center">' + mainObj[i]["fields"]["des"] + '</td>';
-            k+= '<td  align="center">' + mainObj[i]["fields"]["price"] + '</td>';
-            k+= '<td  align="center">' + mainObj[i]["fields"]["status"] + '</td>';
-            k+= '<td  align="center">' + mainObj[i]["fields"]["hstatus"] + '</td>';
-            k+= '<td  align="center"> <a href="/updatetest/'+mainObj[i]["pk"]+'">Edit </a><a href="/deletetest/'+mainObj[i]["pk"]+'">Delete</a> ';
+            k+= '<td>' + mainObj[i]["fields"]["name"] + '</td>';
+            k+= '<td>' + mainObj[i]["fields"]["des"] + '</td>';
+            k+= '<td>' + mainObj[i]["fields"]["price"] + '</td>';
+            k+= '<td> <a href="/updatetest/'+mainObj[i]["pk"]+'">Edit </a><a href="/deletetest/'+mainObj[i]["pk"]+'">Delete</a> ';
             k+= '</tr>';
         }
         k+='</tbody>';
         document.getElementById('tableData').innerHTML = k;
 }
-
-</script>
-
-<script type="text/javascript">
-
-    $(document).ready(function () {
-    $('#example').DataTable();
-
-});
 
 </script>
 {% endblock %}

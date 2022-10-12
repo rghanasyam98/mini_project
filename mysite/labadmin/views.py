@@ -6,8 +6,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
-import datetime
-from.models import Patient,Slot,Customer,User,Appointment,Category,Feedback,Home,Info,Order,Payment,Result,Test,Day,Dayonly
+from.models import Patient,Slot,Customer,User,Appointment,Category,Feedback,Home,Info,Order,Payment,Result,Test
 
 
 User = get_user_model()
@@ -33,13 +32,8 @@ def signup(request):
 @login_required
 def test_management(request):
     catgry = Category.objects.order_by('name')[:]
-    # test = Test.objects.all()
-
-    caty = Category.objects.all().first()
-    # print(cat.id)
-    # print(cat.name)
-    test = Test.objects.filter(category_id=caty.id)
-    context = {'catgry': catgry, 'test':test,'caty':caty}
+    test = Test.objects.all()
+    context = {'catgry': catgry, 'test':test}
     return render(request, 'labadmin/test manage.html',context)
 
 
@@ -59,80 +53,9 @@ def deletetest(request,tid):
     return redirect('test_management')
 
 @login_required
-def date_management(request):
-    dd=Day.objects.all().values()
-    # dd=Day.objects.select_related('category')
-    current_date = datetime.date.today()
-    # print(current_date)
-    # d=Day.objects.all(date_gte = current_date).distinct()
-    d = Day.objects.all().distinct()
-    # context={'dd':dd,'disday':d}
-
-
-    return render(request,'labadmin/datemanage.html',)
-
-@login_required
-def listbydate(request):
-    did = request.GET['ddate']
-    # print(cat_id)
-    cat = Day.objects.filter(id=did)
-    qs_json = serialize('json', cat)
-    print(qs_json)
-    return JsonResponse({"testresult": qs_json})
-
-@login_required
-def deletedayslot(request, dsid):
-    entry = Day.objects.get(id=dsid)
-    print(entry)
-    entry.delete()
-
-
-    return redirect('date_management')
-
-
-
-@login_required
-def add_date(request):
-    d=request.POST['tdate']
-    # print(d)
-    slt=Slot.objects.all().values()
-    # print(slt)
-    d_date = Dayonly()
-    d_date.date = d
-    d_date.save()
-    # entry = Dayonly.objects.get()
-    # did=Dayonly.objects.latest('id')
-    LastInsertId = int((Dayonly.objects.last()).id)
-    print(LastInsertId)
-
-    for s in slt:
-        dd=Day()
-        dd.date=d
-        dd.start=s.get('start')
-        dd.end=s.get('end')
-        dd.t1=s.get('t1')
-        dd.t2=s.get('t2')
-        dd.strength=s.get('strength')
-        dd.astrength=s.get('strength')
-        dd.status = "Available"
-        dd.category_id=s.get('category_id')
-        # dd.did=LastInsertId
-
-        dd.save()
-
-    return redirect('date_management')
-
-
-
-@login_required
 def slot_management(request):
     catgry = Category.objects.order_by('name')[:]
-    caty = Category.objects.all().first()
-    # print(cat.id)
-    # print(cat.name)
-    slt = Slot.objects.filter(category_id=caty.id)
-
-    context = {'catgry': catgry,'slt':slt,'caty':caty}
+    context = {'catgry': catgry}
     return render(request, 'labadmin/slot manage.html', context)
 
 @login_required
@@ -152,7 +75,6 @@ def cat_management(request):
 @login_required
 def list_by_cat(request):
     cat_id = request.GET['cat_id']
-    print(cat_id)
     cat = Test.objects.filter(category_id=cat_id)
     qs_json = serialize('json', cat)
     print(qs_json)
@@ -162,7 +84,6 @@ def list_by_cat(request):
 def list_by_cat2(request):
     cat_id = request.GET['cat_id']
     cat = Slot.objects.filter(category_id=cat_id)
-    print(cat)
     qs_json = serialize('json', cat)
     print(qs_json)
     return JsonResponse({"slotresult": qs_json})
@@ -297,19 +218,18 @@ def gettestdata(request):
     tavail = request.POST.getlist('available')
     havail = request.POST.getlist('home')
     print(cat)
-    if (len(tavail) == 0):
 
-        ts = "Not available"
+    if(len(tavail)==0):
+
+        ts="Not available"
     else:
-        ts = "Available"
+        ts="Available"
 
     if (len(havail) == 0):
 
         hs = "Not available"
     else:
         hs = "Available"
-
-
 
     c = Test()
     c.name = tname
@@ -319,17 +239,15 @@ def gettestdata(request):
     c.hstatus=hs
     c.category_id=cat
     c.save()
+
+
     return redirect('test_management')
-
-
-
 
 
 @login_required
 def updatetest(request, tid):
    # catgry = Category.objects.order_by('name')[:]
    # context = {'catgry': catgry}
-       request.session['testid'] = tid
        test =Test.objects.get(id=tid)
        p1=0
        p2=0
@@ -337,60 +255,36 @@ def updatetest(request, tid):
            p1=1
        if test.hstatus=="Available":
            p2=1
-       print(test.category_id)
-       catgry = Category.objects.all().values()
        print(p1)
        print(p2)
        print(test.status)
        print(test.hstatus)
-       context = {'test': test,'f1':p1,'f2':p2,'catgry':catgry}
+       context = {'test': test,'f1':p1,'f2':p2}
        return render(request, 'labadmin/update test.html',context)
 
 
 
 @login_required
 def getupdatedtestdata(request):
-    tid = request.session['testid']
-    c = Test.objects.get(id=tid)
     tname = request.POST['test']
     des = request.POST['testdes']
     price = request.POST['price']
     cat = request.POST['category']
     tavail = request.POST.getlist('available')
     havail = request.POST.getlist('home')
-    print(cat)
-    if (len(tavail) == 0):
 
-        ts = "Not available"
-    else:
-        ts = "Available"
+    print(tname,des,price,cat,tavail,havail)
 
-    if (len(havail) == 0):
-
-        hs = "Not available"
-    else:
-        hs = "Available"
-
-    c.name = tname
-    c.price = price
-    c.des = des
-    c.status =ts
-    c.hstatus = hs
-    c.category_id = cat
-    c.save()
-    # print(tname,des,price,cat,tavail,havail)
-
-    # catgry = Category.objects.order_by('name')[:]
-    # context = {'catgry': catgry}
-    # return render(request,'labadmin/test manage.html',context)
-    return redirect('test_management')
+    catgry = Category.objects.order_by('name')[:]
+    context = {'catgry': catgry}
+    return render(request,'labadmin/test manage.html',context)
 
 
-# @login_required
-# def updateslot(request):
-#
-#
-#     return render(request, 'labadmin/update slot.html')
+@login_required
+def updateslot(request):
+
+
+    return render(request, 'labadmin/update slot.html')
 
 
 @login_required
@@ -398,14 +292,6 @@ def getupdatedslotdata(request):
     #slot_interval = request.POST['slot_interval']
     #strength = request.POST['strength']
     #status = request.POST.getlist('slot_status')
-
-    start = request.POST['start']
-    t1 = request.POST['t1']
-    end = request.POST['end']
-    t2 = request.POST['t2']
-    strength = request.POST['strength']
-    # status = request.POST.getlist('slot_status')
-    cat = request.POST['category']
 
 
     return render(request, 'labadmin/slot manage.html')
@@ -449,73 +335,13 @@ def addslotdata(request):
     return redirect('slot_management')
     #return render(request, 'labadmin/slot manage.html')
 
-
+#
 @login_required
 def deleteslot(request, sid):
     print(sid)
-    entry = Slot.objects.get(id=sid)
-    print(entry)
-    entry.delete()
+
+
     return redirect('slot_management')
-
-@login_required
-def updateslot(request, sid):
-    request.session['sltid'] = sid
-    #slt = Slot.objects.get(id=sid)
-    slt = Slot.objects.get(id=sid)
-    print(slt.category_id)
-    catgry = Category.objects.order_by('name')[:]
-    print(slt)
-    p1=0
-    p2=0
-
-    if slt.t1=="AM":
-        p1=1
-    if slt.t2 == "AM":
-        p2 = 1
-    print(slt.t1)
-    print(p1)
-    print(slt.t2)
-    print(p2)
-    context = {'slt': slt,'catgry':catgry,'p1':p1,'p2':p2}
-
-
-    return render(request,'labadmin/update slot.html', context)
-
-
-@login_required
-def getupdatedslotdata(request):
-    #slot_interval = request.POST['slot_interval']
-    #strength = request.POST['strength']
-    #status = request.POST.getlist('slot_status')
-    sid=request.session['sltid']
-    print(sid)
-    slt=Slot.objects.get(id=sid)
-    start = request.POST['start']
-    t1 = request.POST['t1']
-    end = request.POST['end']
-    t2 = request.POST['t2']
-    strength = request.POST['strength']
-    # status = request.POST.getlist('slot_status')
-    # cat = request.POST['category']
-    slt.start=start
-    slt.end=end
-    slt.t1=t1
-    slt.t2=t2
-    slt.strength=strength
-    slt.save()
-    return redirect('slot_management')
-
-@login_required
-def listbydate(request):
-    did = request.GET['ddate']
-    # print(cat_id)
-    cat = Day.objects.filter(id=did)
-    qs_json = serialize('json', cat)
-    print(qs_json)
-    return JsonResponse({"testresult": qs_json})
-
-
 
 
 
