@@ -79,33 +79,33 @@ input:checked + .slider:before {
       <td width="172" height="53">Name</td>
       <td width="316"><label for="test"></label>
         <div align="center">
-          <input type="text" name="test" id="test" />
+          <input type="text" name="test" id="test" required />
         </div></td>
       </tr>
     <tr>
       <td>Description</td>
       <td><label for="testdes"></label>
         <div align="center">
-          <textarea name="testdes" id="testdes" cols="45" rows="5"></textarea>
+          <textarea name="testdes" id="testdes" cols="45" rows="5" required ></textarea>
         </div></td>
       </tr>
     <tr>
       <td height="49">Price</td>
       <td><label for="price"></label>
         <div align="center">
-        <input type="text" name="price" id="price" /> </div></td>
+        <input type="text" name="price" id="price" required /> </div></td>
 
       </tr>
     <tr>
       <td height="61" colspan="2">Available Now : <!-- Rounded switch -->
 <label class="switch">
   <div align="center">
-    <input type="checkbox" name="available" value="true">
+    <input type="checkbox" name="available" value="true" >
     <span class="slider round"></span>
   </div>
 </label>  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Home collection : <label class="switch">
   <div align="center">
-    <input type="checkbox" name="home" value="true">
+    <input type="checkbox" name="home" value="true" >
     <span class="slider round"></span>
   </div>
 </label></td>
@@ -114,7 +114,7 @@ input:checked + .slider:before {
       <td height="55">Category</td>
       <td><label for="category"></label>
         <div align="center">
-          <select name="category" id="category">
+          <select name="category" id="category" required>
             {% for cat in catgry %}
             <option value="{{ cat.id }}">{{cat.name}}</option>
             {% endfor %}

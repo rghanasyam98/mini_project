@@ -1,123 +1,150 @@
-{% extends 'index2.html' %}
-<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
-<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
-<!--<head>-->
-<!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
-<!--<title>Untitled Document</title>-->
-<style type="text/css">
-/* The switch - the box around the slider */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
+{% include "admin_header.html" %}
+<!--&lt;!&ndash;<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">&ndash;&gt;-->
+<!--&lt;!&ndash;<html xmlns="http://www.w3.org/1999/xhtml">&ndash;&gt;-->
+<!--&lt;!&ndash;<head>&ndash;&gt;-->
+<!--&lt;!&ndash;<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />&ndash;&gt;-->
+<!--&lt;!&ndash;<title>Untitled Document</title>&ndash;&gt;-->
+<!--<style type="text/css">-->
+<!--/* The switch - the box around the slider */-->
+<!--.switch {-->
+<!--  position: relative;-->
+<!--  display: inline-block;-->
+<!--  width: 60px;-->
+<!--  height: 34px;-->
+<!--}-->
 
-/* Hide default HTML checkbox */
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
+<!--/* Hide default HTML checkbox */-->
+<!--.switch input {-->
+<!--  opacity: 0;-->
+<!--  width: 0;-->
+<!--  height: 0;-->
+<!--}-->
 
-/* The slider */
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
+<!--/* The slider */-->
+<!--.slider {-->
+<!--  position: absolute;-->
+<!--  cursor: pointer;-->
+<!--  top: 0;-->
+<!--  left: 0;-->
+<!--  right: 0;-->
+<!--  bottom: 0;-->
+<!--  background-color: #ccc;-->
+<!--  -webkit-transition: .4s;-->
+<!--  transition: .4s;-->
+<!--}-->
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
+<!--.slider:before {-->
+<!--  position: absolute;-->
+<!--  content: "";-->
+<!--  height: 26px;-->
+<!--  width: 26px;-->
+<!--  left: 4px;-->
+<!--  bottom: 4px;-->
+<!--  background-color: white;-->
+<!--  -webkit-transition: .4s;-->
+<!--  transition: .4s;-->
+<!--}-->
 
-input:checked + .slider {
-  background-color: #2196F3;
-}
+<!--input:checked + .slider {-->
+<!--  background-color: #2196F3;-->
+<!--}-->
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
+<!--input:focus + .slider {-->
+<!--  box-shadow: 0 0 1px #2196F3;-->
+<!--}-->
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
+<!--input:checked + .slider:before {-->
+<!--  -webkit-transform: translateX(26px);-->
+<!--  -ms-transform: translateX(26px);-->
+<!--  transform: translateX(26px);-->
+<!--}-->
 
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
+<!--/* Rounded sliders */-->
+<!--.slider.round {-->
+<!--  border-radius: 34px;-->
+<!--}-->
 
-.slider.round:before {
-  border-radius: 50%;
-}
-</style>
-</head>
+<!--.slider.round:before {-->
+<!--  border-radius: 50%;-->
+<!--}-->
+<!--</style>-->
+<!--</head>-->
 
-<!--<body>-->
-{% block content %}
+<!--&lt;!&ndash;<body>&ndash;&gt;-->
+<!--{% block content %}-->
 
-<br><br><br><BR><br>
+<!--<br><br><br><BR><br>-->
 <form  action="{% url 'addslotdata'  %}" method="post">
   {% csrf_token %}
   <div align="center">
-    <table width="547" height="314" border="1">
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-6">
+
+
+
+
+
+
+
+
+
+
+    <table width="547" height="314" border="1"    >
 
       <tr>
-        <td height="55"> <div align="center">Category</div></td>
-      <td><label for="category"></label>
+        <th height="55"> <div align="center">Category</div></th>
+      <th><label for="category"></label>
         <div align="center">
-          <select name="category" id="category">
+          <select name="category" id="category"   class="form-control" required>
             {% for cat in catgry %}
             <option value="{{ cat.id }}">{{cat.name}}</option>
             {% endfor %}
           </select>
-        </div></td>
+        </div></th>
       </tr>
 
       <tr>
-        <td width="251"> <div align="center">Slot interval start</div></td>
-        <td width="280"><div align="center">
-          <input type="text" name="start" id="slot" />  <select name="t1" id="t1">
+        <th width="251"> <div align="center">Slot interval start</div></th>
+        <th width="280"><div align="center">
+          <input type="text" name="start" id="slot"  class="form-control"  required/>  <select name="t1" id="t1" class="form-control" required>
           <option value="AM">AM</option>
            <option value="PM">PM</option>
         </select>
-        </div></td>
+        </div></th>
       </tr>
 
       <tr>
-        <td width="251"> <div align="center">Slot interval end</div></td>
-        <td width="280"><div align="center">
-          <input type="text" name="end" id="slot2" />
-           <select name="t2" id="t2">
+        <th width="251"> <div align="center">Slot interval end</div></th>
+        <th width="500"><div align="center">
+          <input type="text" name="end" id="slot2"  class="form-control"  required />
+           <select name="t2" id="t2"   class="form-control" required >
           <option value="AM">AM</option>
            <option value="PM">PM</option>
         </select>
-        </div></td>
+        </div></th>
       </tr>
 
       <tr>
-        <td> <div align="center">Strength</div></td>
-        <td><label for="strength"></label>
+        <th> <div align="center">Strength</div></th>
+        <th width=500"" ><label for="strength"></label>
           <div align="center">
-            <input type="text" name="strength" id="strength" />
-        </div></td>
+            <input type="text" name="strength" id="strength"   class="form-control" required />
+        </div></th>
       </tr>
 <!--      <tr>-->
 <!--        <td colspan="2"<div align="center">Available Now : &lt;!&ndash; Rounded switch &ndash;&gt;-->
@@ -129,13 +156,21 @@ input:checked + .slider:before {
 <!--</label></div></td>-->
 <!--      </tr>-->
       <tr>
-        <td colspan="2"><div align="center"><input name="addslot" type="submit" id="addslot" value="Add" /></div></td>
+        <th colspan="2"><div align="center"><input name="addslot" type="submit" id="addslot" value="Add" class="btn btn-primary" /> </div></th>
       </tr>
   </table>
-  </div>
+
+              </div>
+
 
 </form>
 
-{% endblock %}
-<!--</body>-->
-<!--</html>-->
+
+</div>
+</div>
+</div>
+
+{% include "admin_footer.html" %}
+<!--{% endblock %}-->
+<!--&lt;!&ndash;</body>&ndash;&gt;-->
+<!--&lt;!&ndash;</html>&ndash;&gt;-->

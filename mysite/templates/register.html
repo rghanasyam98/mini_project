@@ -54,7 +54,7 @@ top: 13px;
                 <div class="row">
                  
                     <div class="form-outline mb-4">
-                  <input type="text" id="form3Example8" class="form-control form-control-lg" name="name" />
+                  <input type="text" id="form3Example8" class="form-control form-control-lg" name="name" required required pattern="[A-Z a-z.]{3,25}" />
                   <label class="form-label" for="form3Example8">Name</label>
                 </div>                
                   
@@ -64,7 +64,7 @@ top: 13px;
 
                 <div class="form-group shadow-textarea">
   
-  <textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" placeholder="Write here..." name="addr"></textarea>
+  <textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" placeholder="Write here..." name="addr" required></textarea>
    <label class="form-label" for="form3Example8">Address</label>
 </div>
 
@@ -76,13 +76,13 @@ top: 13px;
 
                   <div class="form-check form-check-inline mb-0 me-4">
                     <input class="form-check-input" type="radio" name="gender" id="femaleGender"
-                      value="female" />
+                      value="female"  required/>
                     <label class="form-check-label" for="femaleGender">Female</label>
                   </div>
 
                   <div class="form-check form-check-inline mb-0 me-4">
                     <input class="form-check-input" type="radio" name="gender" id="maleGender"
-                      value="male" />
+                      value="male"  required />
                     <label class="form-check-label" for="maleGender">Male</label>
                   </div>
 
@@ -93,17 +93,17 @@ top: 13px;
                 
 
                 <div class="form-outline mb-4">
-                  <input type="text" id="form3Example90" class="form-control form-control-lg" name="mob" />
+                  <input type="text" id="form3Example90" class="form-control form-control-lg" name="mob"  required   pattern="[0-9]{10}"/>
                   <label class="form-label" for="form3Example90">Mobile Number</label>
                 </div>
                  <div class="form-outline mb-4">
-                  <input type="email" id="form3Example97" class="form-control form-control-lg" name="email" />
+                  <input type="email" id="form3Example97" class="form-control form-control-lg" name="email"  required />
                   <label class="form-label" for="form3Example97">Email ID</label>
                 </div>
 
 
                 <div class="form-outline mb-4">
-                  <input type="password" id="form3Example99" class="form-control form-control-lg"  name="pwd" />
+                  <input type="password" id="form3Example99" class="form-control form-control-lg"  name="pwd" required />
                   <label class="form-label" for="form3Example99">Password</label>
                 </div>
 
@@ -111,8 +111,11 @@ top: 13px;
                 <div class="d-flex justify-content-end pt-3">
                   <input type="reset" class="btn btn-light btn-lg" value="Reset"> </input>
                   <input type="submit" class="btn btn-warning btn-lg ms-2" value="REGISTER"></input>
-                     </div>
 
+                     </div>
+                        <p class="mb-5 pb-lg-2" style="color: #393f81;">
+                         <br><br>Already have account? <a href="{% url 'signin' %}"
+                      style="color: #393f81;">Login here</a></p>
                 </div>
 
               </div>

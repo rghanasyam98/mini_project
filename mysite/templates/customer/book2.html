@@ -16,9 +16,17 @@ background: #eee;
 
 <body>
 
-</form>
+
 <!-- Default form register -->
-<form action="" method="post" name="test">
+<form action="{% url 'gotoslotpage' %}" method="post" name="test">
+    {% csrf_token %}
+
+<div>
+
+          <input type="submit" name="submit" id="submit" value="Next" onclick="return displayMessage()" />
+
+    </div>
+
 <!--<div align="right"><select name="category" id="category">-->
 <!--  {% for cat in catgry %}-->
 <!--  <option value="{{cat.id}}">{{cat.name}}</option>-->
@@ -43,10 +51,12 @@ background: #eee;
     <td> <div align="center"> {{ t.name }} </div></td>
     <td>{{ t.des }}</td>
     <td> <div align="center"> {{ t.price }} </div></td>
-     <td><div align="center"><a href="{% url 'select' t.id %}">Select</a></div></td>
-
+      <td><div align="center">
+<!--          <input type="checkbox" name="type[]" value="1"/> </div></td>-->
+<input type="checkbox" name="type1" value="{{t.id}}"  id="checkbox" /> </div></td>
   </tr>
   {% endfor %}
+
 
 
       </tbody>
@@ -62,6 +72,26 @@ background: #eee;
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script>
+
+
+
+            function displayMessage(){
+                const btn = document.getElementById('submit');
+                const checkbox = document.getElementById('checkbox');
+                if(!checkbox.checked) {
+                    alert("Atleast one test should be choosen...");
+                    return false;
+                }
+                return true;
+
+                // else
+                //     console.log("Checkbox selected: ", checkbox.checked);
+            };
+        </script>
+
+
 
 
 <!--<script type="text/javascript">-->
@@ -116,3 +146,4 @@ background: #eee;
 <!--}-->
 
 <!--</script>-->
+

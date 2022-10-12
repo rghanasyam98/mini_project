@@ -91,7 +91,7 @@ input:checked + .slider:before {
       <tr>
         <td width="251"> <div align="center">Slot interval start</div></td>
         <td width="280"><div align="center">
-          <input type="text" name="start" id="slot"  value="{{ slt.start }}" />  <select name="t1" id="t1">
+          <input type="text" name="start" id="slot"  value="{{ slt.start }}" required />  <select name="t1" id="t1" required>
           <option value="AM" {% if p1 == 1 %} selected  {% endif %}>AM</option>
            <option value="PM" {% if p1 == 0 %} selected  {% endif %}>PM</option>
         </select>
@@ -101,8 +101,8 @@ input:checked + .slider:before {
       <tr>
         <td width="251"> <div align="center">Slot interval end</div></td>
         <td width="280"><div align="center">
-          <input type="text" name="end" id="slot2"  value="{{ slt.end }}" />
-           <select name="t2" id="t2">
+          <input type="text" name="end" id="slot2"  value="{{ slt.end }}" required />
+           <select name="t2" id="t2" required>
           <option value="AM"   {% if p2 == 1 %} selected  {% endif %}>AM</option>
            <option value="PM"  {% if p2 == 0 %} selected  {% endif %}>PM</option>
         </select>
@@ -113,7 +113,7 @@ input:checked + .slider:before {
         <td> <div align="center">Strength</div></td>
         <td><label for="strength"></label>
           <div align="center">
-            <input type="text" name="strength" id="strength"  value="{{ slt.strength }}"/>
+            <input type="text" name="strength" id="strength"  value="{{ slt.strength }}" required/>
         </div></td>
       </tr>
 <!--      <tr>-->

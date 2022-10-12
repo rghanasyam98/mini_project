@@ -79,20 +79,20 @@ input:checked + .slider:before {
       <td width="172" height="53"><div align="center">Name</div></td>
       <td width="316"><label for="test"></label>
         <div align="center">
-          <input type="text" name="test" id="test" value="{{ test.name }}" />
+          <input type="text" name="test" id="test" value="{{ test.name }}" required />
         </div></td>
       </tr>
     <tr>
       <td><div align="center">Description</div></td>
       <td><label for="testdes"></label>
         <div align="center">
-          <textarea name="testdes" id="testdes" cols="45" rows="5" value="">{{ test.des }}</textarea>
+          <textarea name="testdes" id="testdes" cols="45" rows="5" value="" required>{{ test.des }}</textarea>
         </div></td>
       </tr>
     <tr>
       <td height="49"><div align="center">Price</div></td>
       <td><label for="price"></label><div align="center">
-        <input type="text" name="price" id="price" value="{{ test.price }}" /></div></td>
+        <input type="text" name="price" id="price" value="{{ test.price }}" required /></div></td>
       </tr>
     <tr><div align="center">
       <td height="61" colspan="2">Available Now :</div> <!-- Rounded switch -->
@@ -112,7 +112,7 @@ input:checked + .slider:before {
       <td height="55"><div align="center">Category</div></td>
       <td><label for="category"></label>
         <div align="center">
-          <select name="category" id="category">
+          <select name="category" id="category" required >
             {% for cat in catgry %}
             <option value="{{ cat.id }}" {% if cat.id == test.category_id %} selected  {% endif %}>{{ cat.name }}</option>
            {% endfor %}

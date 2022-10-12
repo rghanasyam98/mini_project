@@ -103,9 +103,30 @@ class Patient(models.Model):
 #      def __str__(self):
 #         return self.patient
 
+class Daytbl(models.Model):
+    date = models.DateField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class Working_days(models.Model):
+    dayonly = models.ForeignKey(Daytbl, on_delete=models.CASCADE)
+    start = models.PositiveIntegerField()
+    end = models.PositiveIntegerField()
+    t1 = models.CharField(max_length=5)
+    t2 = models.CharField(max_length=5)
+    strength = models.PositiveIntegerField()
+    astrength = models.PositiveIntegerField()
+    status = models.CharField(max_length=15)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE,related_name='categories')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    # def __str__(self):
+    #     return self.start
+
 class Appointment(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
-    bdate = models.DateField()
+    bookslot=models.ForeignKey(Working_days,on_delete=models.CASCADE)
+    bdate = models.ForeignKey(Daytbl, on_delete=models.CASCADE)
     mode = models.CharField(max_length=15)
     token = models.PositiveIntegerField(default=0)
     status = models.CharField(max_length=20)
@@ -121,7 +142,7 @@ class Appointment(models.Model):
 class Order(models.Model):
     appointment = models.ForeignKey(Appointment, on_delete=models.CASCADE)
     tests = models.ForeignKey(Test,  on_delete=models.CASCADE)
-    slot=models.ForeignKey(Slot, on_delete=models.CASCADE)
+    # slot=models.ForeignKey(Slot, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -197,23 +218,8 @@ class Result(models.Model):
 
 
 
-class Dayonly(models.Model):
-    date = models.DateField()
 
 
-class Day(models.Model):
-    did = models.ForeignKey(Dayonly, on_delete=models.CASCADE, default=1)
-    start = models.PositiveIntegerField(default=0)
-    end = models.PositiveIntegerField(default=0)
-    t1 = models.CharField(max_length=5)
-    t2 = models.CharField(max_length=5)
-    strength = models.PositiveIntegerField(default=0)
-    astrength = models.PositiveIntegerField(default=0)
-    status = models.CharField(max_length=15)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
-    # def __str__(self):
-    #     return self.start
+
 

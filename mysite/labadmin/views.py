@@ -6,8 +6,10 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
+
 import datetime
-from.models import Patient,Slot,Customer,User,Appointment,Category,Feedback,Home,Info,Order,Payment,Result,Test,Day,Dayonly
+from django.db.models import F
+from.models import Patient,Slot,Customer,User,Appointment,Category,Feedback,Home,Info,Order,Payment,Result,Test,Working_days,Daytbl
 
 
 User = get_user_model()
@@ -55,21 +57,27 @@ def deletetest(request,tid):
     entry = Test.objects.get(id=tid)
     print(entry)
     entry.delete()
+    url = 'test'
+    # resp_body = '<script>alert("Test deleted successfully...");\
+    #                     window.location="%s"</script>' % url
+    # return HttpResponse(resp_body)
 
     return redirect('test_management')
 
 @login_required
 def date_management(request):
-    dd=Day.objects.all().values()
+    available_days=Daytbl.objects.all()
+    topdate = Daytbl.objects.all().first()
+    dd=Working_days.objects.filter(dayonly_id=topdate)
     # dd=Day.objects.select_related('category')
     current_date = datetime.date.today()
     # print(current_date)
     # d=Day.objects.all(date_gte = current_date).distinct()
-    d = Day.objects.all().distinct()
-    # context={'dd':dd,'disday':d}
+    # d = Day.objects.all().distinct()
+    context={'dd': dd, 'available_days':available_days, 'topdate':topdate}
 
 
-    return render(request,'labadmin/datemanage.html',)
+    return render(request,'labadmin/datemanage.html',context)
 
 @login_required
 def listbydate(request):
@@ -82,7 +90,7 @@ def listbydate(request):
 
 @login_required
 def deletedayslot(request, dsid):
-    entry = Day.objects.get(id=dsid)
+    entry = Working_days.objects.get(id=dsid)
     print(entry)
     entry.delete()
 
@@ -97,16 +105,18 @@ def add_date(request):
     # print(d)
     slt=Slot.objects.all().values()
     # print(slt)
-    d_date = Dayonly()
+    d_date = Daytbl();
     d_date.date = d
     d_date.save()
     # entry = Dayonly.objects.get()
     # did=Dayonly.objects.latest('id')
-    LastInsertId = int((Dayonly.objects.last()).id)
+    LastInsertId = (Daytbl.objects.last()).id
     print(LastInsertId)
+    # ddd=Dayonly.objects.get(id=LastInsertId)
+    # print(ddd.id)
 
     for s in slt:
-        dd=Day()
+        dd=Working_days()
         dd.date=d
         dd.start=s.get('start')
         dd.end=s.get('end')
@@ -116,11 +126,17 @@ def add_date(request):
         dd.astrength=s.get('strength')
         dd.status = "Available"
         dd.category_id=s.get('category_id')
-        # dd.did=LastInsertId
+        dd.dayonly_id=LastInsertId
 
         dd.save()
+    url = 'date_management'
+    resp_body = '<script>alert("Day added successfully...");\
+                        window.location="%s"</script>' % url
+    return HttpResponse(resp_body)
 
-    return redirect('date_management')
+
+
+    # return redirect('date_management')
 
 
 
@@ -143,6 +159,8 @@ def cat_management(request):
     #}
     #catgry = get_object_or_404(Category)
     #context = {' catgry':  catgry}
+    # messages.info(request, 'Category successfully Added !')
+
     catgry = Category.objects.order_by('name')[:]
     context = {'catgry': catgry}
     return render(request, 'labadmin/category.html', context)
@@ -180,15 +198,15 @@ def getregisterdata (request):
     phone = request.POST['mob']
     email = request.POST['email']
     passwd = request.POST['pwd']
-    print(name,addr,gen,phone,email,passwd)
-    p=make_password(passwd)
-    u=User()
-    u.email=email
-    u.password=p
-    u.username=email
-    u.first_name=name
-    u.last_name=name
-    u.user_type="customer"
+    print(name, addr, gen, phone, email, passwd)
+    p = make_password(passwd)
+    u = User()
+    u.email = email
+    u.password = p
+    u.username = email
+    u.first_name = name
+    u.last_name = name
+    u.user_type = "customer"
     u.save()
     uid = User.objects.filter(email=email).values('id')
     print(uid)
@@ -199,17 +217,30 @@ def getregisterdata (request):
     for i in uid:
         z = i.get('id')
     print(z)
-    c=Customer()
-    c.user_id=z
-    c.name=name
-    c.address=addr
-    c.gender=gen
-    c.phone=phone
+    c = Customer()
+    c.user_id = z
+    c.name = name
+    c.address = addr
+    c.gender = gen
+    c.phone = phone
     c.save()
+    return render(request,'index.html')
+
+    # # emailcheck=User.objects.get(email=email).username
+    # # emailcheck=User.objects.order_by('email')[:]
+    # # for x in emailcheck:
+    # #     if x.emaemail:
+    #
+    #
+    #
+    # # else:
+    # #     return HttpResponse('Email already exists..')
+    # return redirect('register')
 
 
 
-    return redirect('register')
+
+
 
 
 
@@ -217,36 +248,61 @@ def login_user(request):
     email = request.POST['username']
     password = request.POST['password']
 
-    username = User.objects.get(email=email).username
-    user = authenticate(username=username, password=password)
+    try:
+        usr = User.objects.get(email=email)
+    except User.DoesNotExist:
+        usr = None
 
-   # print(uid)
+    if(usr):
 
-    if user is not None:
-        usertype = user.user_type
+        user = authenticate(username=usr.username, password=password)
 
-        if usertype == "labadmin":
-            # return render(request, 'labadmin/admindash.html')
-          login(request, user)
-          return redirect('labhome')
+       # print(uid)
 
-        # elif usertype == 'resp':
-        #     return render(request, '')
-        elif usertype == 'customer':
+        if user is not None:
+            usertype = user.user_type
 
-            login(request, user)
-            customer = Customer.objects.get(user=user)
-            request.session['uid'] = customer.id
-            request.session['uname'] = customer.name
+            if usertype == "labadmin":
+                # return render(request, 'labadmin/admindash.html')
+              login(request, user)
+              return redirect('labhome')
 
-            # return render(request, 'customer/user dash.html', context)
-            return render(request, 'index3.html')
-           #return render(request, 'mysite/customer/templates/user dash.html')
+            # elif usertype == 'resp':
+            #     return render(request, '')
+            elif usertype == 'customer':
+
+                # customer = Customer.objects.filter(user_id = user.id)
+                customer = Customer.objects.get(user_id=user.id)
+                print(customer)
+
+                if(customer):
+
+                    request.session['uid'] = customer.id
+                    request.session['uname'] = customer.name
+                    login(request, user)
+                # return render(request, 'customer/user dash.html', context)
+                    return render(request, 'index3.html')
+
+                else:
+                    return HttpResponse('User not found!')
+
+               #return render(request, 'mysite/customer/templates/user dash.html')
+            elif usertype == 'recep':
+                return render(request, 'index4.html')
+
+            else:
+                return HttpResponse('Invalid user!')
+
         else:
-            return HttpResponse('Invalid user!')
+            url = 'signin'
+            resp_body = '<script>alert("Login error...");\
+                                                   window.location="%s"</script>' % url
+            return HttpResponse(resp_body)
 
-    else:
-        return HttpResponse('login error!')
+    url = 'signin'
+    resp_body = '<script>alert("Invalid username or password!");\
+                                                       window.location="%s"</script>' % url
+    return HttpResponse(resp_body)
 
 
 @login_required
@@ -257,11 +313,19 @@ def addcat(request):
        print(cat)
        p = Category(name=cat)
        p.save()
+
+       url = 'cat'
+       resp_body = '<script>alert("New category added successfully...");\
+                    window.location="%s"</script>' % url
+       return HttpResponse(resp_body)
+
     #catgry = Category.objects.all().values()
     #print(catgry)
-    catgry = Category.objects.order_by('name')[:]
-    context = {'catgry': catgry}
-    return render(request, 'labadmin/category.html', context)
+
+    # catgry = Category.objects.order_by('name')[:]
+    # context = {'catgry': catgry}
+    # return render(request, 'labadmin/category.html', context)
+    return redirect('cat_management')
 
 
 @login_required
@@ -270,8 +334,16 @@ def deletecat(request, catid):
     print(entry)
     entry.delete()
 
+    # url = 'cat'
+    # resp_body = '<script>alert("Deleted successfully...");\
+    #                               window.location="%s"</script>' % url
+    # return HttpResponse(resp_body)
 
-    return redirect('addcat')
+
+
+
+
+    return redirect('cat_management')
 
 
 @login_required
@@ -319,7 +391,13 @@ def gettestdata(request):
     c.hstatus=hs
     c.category_id=cat
     c.save()
-    return redirect('test_management')
+
+    url = 'test'
+    resp_body = '<script>alert("New test added successfully...");\
+                        window.location="%s"</script>' % url
+    return HttpResponse(resp_body)
+
+    # return redirect('test_management')
 
 
 
@@ -383,7 +461,12 @@ def getupdatedtestdata(request):
     # catgry = Category.objects.order_by('name')[:]
     # context = {'catgry': catgry}
     # return render(request,'labadmin/test manage.html',context)
-    return redirect('test_management')
+
+    url = 'test'
+    resp_body = '<script>alert(" Test details updated successfully...");\
+                           window.location="%s"</script>' % url
+    return HttpResponse(resp_body)
+    # return redirect('test_management')
 
 
 # @login_required
@@ -407,8 +490,13 @@ def getupdatedslotdata(request):
     # status = request.POST.getlist('slot_status')
     cat = request.POST['category']
 
+    url = 'slot_management'
+    resp_body = '<script>alert("Slot updated successfully...");\
+                            window.location="%s"</script>' % url
+    return HttpResponse(resp_body)
 
-    return render(request, 'labadmin/slot manage.html')
+
+    # return render(request, 'labadmin/slot manage.html')
 
 
 @login_required
@@ -446,7 +534,12 @@ def addslotdata(request):
     # s.astrength = strength
     s.save()
 
-    return redirect('slot_management')
+    url = 'slot_management'
+    resp_body = '<script>alert("Slot added successfully...");\
+                        window.location="%s"</script>' % url
+    return HttpResponse(resp_body)
+
+    # return redirect('slot_management')
     #return render(request, 'labadmin/slot manage.html')
 
 
@@ -456,6 +549,12 @@ def deleteslot(request, sid):
     entry = Slot.objects.get(id=sid)
     print(entry)
     entry.delete()
+    # url = 'slot_management'
+    # resp_body = '<script>alert("Slot deleted successfully...");\
+    #                         window.location="%s"</script>' % url
+    # return HttpResponse(resp_body)
+
+
     return redirect('slot_management')
 
 @login_required
@@ -508,9 +607,11 @@ def getupdatedslotdata(request):
 
 @login_required
 def listbydate(request):
-    did = request.GET['ddate']
+    did = request.GET['cat_id']
     # print(cat_id)
-    cat = Day.objects.filter(id=did)
+    cat = Working_days.objects.filter(dayonly_id=did).annotate(name = F('category__name'));
+
+
     qs_json = serialize('json', cat)
     print(qs_json)
     return JsonResponse({"testresult": qs_json})

@@ -16,6 +16,9 @@ urlpatterns = [
      path('book3', views.book3, name="book3"),
      path('editprofile', views.editprofile, name="editprofile"),
      path('getupdatedprofile', views.getupdatedprofile, name="getupdatedprofile"),
+     path('gotoslotpage', views.gotoslotpage, name="gotoslotpage"),
+     path('bookingsummary/<int:bksid>/', views.bookingsummary, name="bookingsummary"),
+     path('bookingcompleted', views.bookingcompleted, name="bookingcompleted"),
 
 
 

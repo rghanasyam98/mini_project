@@ -15,25 +15,25 @@
           <td width="157"><div align="center">Name</div></td>
           <td width="251"><label for="pname"></label>
             <div align="center">
-              <input type="text" name="pname" id="pname" />
+              <input type="text" name="pname" id="pname" required pattern="[A-Z a-z.]{3,25}" />
           </div></td>
         </tr>
         <tr>
           <td><div align="center">Age</div></td>
           <td><div align="center">
             <label for="pAge"></label>
-            <input type="text" name="pAge" id="pAge" />
+            <input type="text" name="pAge" id="pAge" required />
           </div></td>
         </tr>
         <tr>
           <td><div align="center">Gender</div></td>
           <td><p align="center">
             <label>
-              <input type="radio" name="gender" value="Male" id="RadioGroup1_0" />
+              <input type="radio" name="gender" value="Male" id="RadioGroup1_0" required />
               Male</label>
             <br />
             <label>
-              <input type="radio" name="gender" value="Female" id="RadioGroup1_1" />
+              <input type="radio" name="gender" value="Female" id="RadioGroup1_1" required />
               Female</label>
             <br />
           </p></td>
@@ -42,12 +42,12 @@
           <td><div align="center">Place</div></td>
           <td><div align="center">
             <label for="place"></label>
-            <input type="text" name="place" id="place" />
+            <input type="text" name="place" id="place" required />
           </div></td>
         </tr>
         <tr><td><div align="center">Phone</div></td>
                <td> <div class="form-outline mb-4" align="center">
-                  <input type="text" id="form3Example90" class="form-control form-control-lg" name="phone" />
+                  <input type="text" id="form3Example90" class="form-control form-control-lg" name="phone" required  pattern="[0-9]{10}" />
                   
                 </div></td>
        </tr>

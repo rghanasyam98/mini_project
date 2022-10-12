@@ -1,53 +1,69 @@
-{% extends 'index2.html' %}
-<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
-<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
-<!--<head>-->
-<!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
-<!--<title>Untitled Document</title>-->
-<!--<style type="text/css">-->
-<!--#category {-->
-<!--	font-size: medium;-->
-<!--}-->
-<!--</style>-->
-<!--&lt;!&ndash;  <script >&ndash;&gt;-->
-<!--&lt;!&ndash;    alert('{{ message }}')&ndash;&gt;-->
-<!--&lt;!&ndash;  </script>&ndash;&gt;-->
-<!--</head>-->
+<!--{% extends 'index2.html' %}-->
+<!--&lt;!&ndash;<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">&ndash;&gt;-->
+<!--&lt;!&ndash;<html xmlns="http://www.w3.org/1999/xhtml">&ndash;&gt;-->
+<!--&lt;!&ndash;<head>&ndash;&gt;-->
+<!--&lt;!&ndash;<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />&ndash;&gt;-->
+<!--&lt;!&ndash;<title>Untitled Document</title>&ndash;&gt;-->
+<!--&lt;!&ndash;<style type="text/css">&ndash;&gt;-->
+<!--&lt;!&ndash;#category {&ndash;&gt;-->
+<!--&lt;!&ndash;	font-size: medium;&ndash;&gt;-->
+<!--&lt;!&ndash;}&ndash;&gt;-->
+<!--&lt;!&ndash;</style>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;  <script >&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    alert('{{ message }}')&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;  </script>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;</head>&ndash;&gt;-->
 
-<!--<body>-->
+<!--&lt;!&ndash;<body>&ndash;&gt;-->
 
 
-{% block content %}
-<br><br><br>
+<!--{% block content %}-->
+{% include "admin_header.html" %}
+
 <form method="post" action="{% url 'addcat' %}" method="post">
                    {% csrf_token %}
-<div align="right"><input name="category" type="text" id="category" align="right" required /><input  type="submit" value="addnew"/></div>
-  <div align="right">
+<div align="left"><input name="category" type="text" id="category" align="right" required /> &nbsp;<input  type="submit" value="addnew" class="btn btn-primary" /></div>
+  <div align="left">
 
 <div>
-    <table id="example" class="display" >
+
+    <div class="row m-t-30">
+                            <div class="col-md-12">
+                                <!-- DATA TABLE-->
+                                <div class="table-data3">
+
+
+
+    <table id="example" class="display"  class="table-primary" width="500" >
  <thead>
 
       <tr>
-        <td width="10" height="69">Sl No</td>
-        <td width="100">Category</td>
+          <td width="10" height="69"> <div align="center">Sl No</div></td>
+          <td width="100"><div align="center">Category</div></td>
         <td width="50"></td>
       </tr>
  </thead>
         <tbody >
       {% for cat in catgry %}
       <tr>
-        <td>{{forloop.counter}}
+          <td> <div align="center">{{forloop.counter}}</div>
          </td>
-        <td>{{cat.name}} </td><td><a href="{% url 'deletecat' cat.id %}">Delete</a> </td>
+          <td> <div align="center"> {{cat.name}} </div></td><td><a href="{% url 'deletecat' cat.id %}">Delete</a> </td>
       </tr>
        {% endfor %}
         </tbody>
   </table>
+
+
+                </div>
+            </div>
+</div>
+
   </div>
     </div>
 
 </form>
+
 
 <script type="text/javascript">
 
@@ -57,6 +73,8 @@
 });
 
 </script>
-{% endblock %}
-<!--</body>-->
-<!--</html>-->
+
+{% include "admin_footer.html" %}
+<!--{% endblock %}-->
+<!--&lt;!&ndash;</body>&ndash;&gt;-->
+<!--&lt;!&ndash;</html>&ndash;&gt;-->

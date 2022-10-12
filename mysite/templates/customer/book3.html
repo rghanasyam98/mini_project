@@ -9,27 +9,59 @@
 <form action="{% url 'book3'  %}" method="post">
   {% csrf_token %}
   <div align="center">
-    <table width="407" height="293" border="1">
-      
-      <tr>
-        <td height="154"><div align="center">Slot</div></td>
-        <td><div align="center">
-          <label for="slot"></label>
-          <select name="slot" id="slot">
-            {% for i in s %}
-            <option value="{{ i.id }}"> {{ i.time }}</option>
-            {% endfor %}
+<!--    <table width="407" height="293" border="1">-->
+<!--      -->
+<!--      <tr>-->
+<!--        <td height="154"><div align="center">Slot</div></td>-->
+<!--        <td><div align="center">-->
+<!--          <label for="slot"></label>-->
+<!--          <select name="slot" id="slot">-->
+<!--            {% for i in slt %}-->
+<!--            <option value="{{ i.id }}"> {{ i. }}</option>-->
+<!--            {% endfor %}-->
 
-          </select>
-        </div></td>
-      </tr>
+<!--          </select>-->
+<!--        </div></td>-->
+<!--      </tr>-->
+<!--      <tr>-->
+<!--        <td colspan="2">          <div align="center">-->
+<!--            <input type="submit" name="next" id="next" value=" proceed" />-->
+<!--        </div></td>-->
+<!--      </tr>-->
+<!--  </table>-->
+<!--  </div>-->
+
+    <table id="example" class="display" border="1">
+ <thead>
+  <tr>
+      <th width="196"><div align="center">SlNo</div></th>
+<!--      <th width="196"><div align="center">Date</div></th>-->
+    <th width="196"><div align="center">Start</div></th>
+    <th width="117"><div align="center">AM/PM</div></th>
+    <th width="187"><div align="center">End</div></th>
+    <th width="193"><div align="center">AM/PM</div></th>
+<!--    <th width="83"><div align="center">Strength</div></th>-->
+<!--    <th width="124"><div align="center">Balance Strength</div></th>-->
+<!--    <th width="112"><div align="center">Status</div></th>-->
+<!--    <th width="129"><div align="center">Category</div></th>-->
+
+  </tr>
+  </thead>
+      <tbody>
+      {% for i in slt %}
       <tr>
-        <td colspan="2">          <div align="center">
-            <input type="submit" name="next" id="next" value=" proceed" />
-        </div></td>
+        <td align="center"> {{ forloop.counter }} </td>
+        <td align="center"> {{ i.start }} </td>
+        <td align="center"> {{ i.t1 }} </td>
+        <td align="center"> {{ i.end }} </td>
+        <td align="center"> {{ i.t2 }} </td>
+        <td width="129" align="center"><a href="{% url 'bookingsummary' i.id %}">Select this slot</a> </td>
       </tr>
-  </table>
-  </div>
+      {% endfor %}
+      </tbody>
+
+    </table>
+
 
 </form>
 </body>

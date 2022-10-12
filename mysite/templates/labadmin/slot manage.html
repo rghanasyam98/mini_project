@@ -1,66 +1,68 @@
-{% extends 'index2.html' %}
+{% include "admin_header.html" %}
 
-<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
-<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
-<!--<head>-->
-<!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
-<!--<title>Untitled Document</title>-->
-<!--</head>-->
-
-{% block content %}
-<body>
-
-
-<br><br><br><br>
 <form action="{% url 'slot' %}" method="post">
   {% csrf_token %}
 <div align="right">
 
- <select name="category" id="category">
-  {% for cat in catgry %}
-    <option value="{{ cat.id }}"  {% if cat.id == caty.id %} selected  {% endif %}>{{ cat.name }}</option>
-   {% endfor %}
-  </select></div>
-
-  <input type="submit" name="addtest" id="addslot" value="Add New" />
-    <div>
-<table width="1393" border="1">
-  <tr>
-    <td width="62" height="57"><div align="center">Sl No</div></td>
-    <td width="485"><div align="center">Start</div></td>
-    <td width="505"><div align="center">AM/PM</div></td>
-      <td width="485"><div align="center">End</div></td>
-    <td width="505"><div align="center">AM/PM</div></td>
-      <td width="505"><div align="center">Strength</div></td>
-<!--    <td width="153"><div align="center">Status</div></td>-->
-    <td width="154"><div align="center">
-
-    </div></td>
-  </tr>
-  <tbody id="tableData">
-
-  {% for s in slt %}
-  <tr><td align="center">{{ forloop.counter }}</td>
-    <td align="center">{{ s.start }}</td>
-    <td align="center">{{ s.t1 }}</td>
-    <td align="center">{{ s.end }}</td>
-    <td align="center">{{ s.t2 }}</td>
-       <td align="center">{{ s.strength }}</td>
-     <td align="center"> <a href="{% url 'updateslot' s.id %}">Edit</a>&nbsp;<a href="{% url 'deleteslot' s.id %}">Delete</a></td>
-  </tr>
-  {% endfor %}
+<!--    <div class="filters m-b-45">-->
+<!--        <div class="rs-select2&#45;&#45;dark rs-select2&#45;&#45;md m-r-10 rs-select2&#45;&#45;border">-->
 
 
 
-  </tbody>
-</table>
-        </div>
+                     <select name="category" id="category"      class="ri-align-right">
+                             {% for cat in catgry %}
+                                  <option value="{{ cat.id }}"  {% if cat.id == caty.id %} selected  {% endif %}>{{ cat.name }}</option>
+                             {% endfor %}
+                      </select></div>
+
+<!--    </div>-->
+<!--</div>-->
+
+  <input type="submit" name="addtest" id="addslot" value="Add New" class="btn btn-primary" />
+ </form>
+  <div class="row m-t-30">
+                            <div class="col-md-12">
+                                <!-- DATA TABLE-->
+                                <div class="table-data3">
 
 
-</form>
 
-</body>
-</html>
+                            <table width="800" border="1"  class="table-primary">
+                              <thead>
+                               <tr>
+                                <th width="50" height="57"><div align="center">Sl No</div></th>
+                                <th width="50"><div align="center">Start</div></th>
+                                <th width="50"><div align="center">AM/PM</div></th>
+                                  <th hwidth="50"><div align="center">End</div></td>
+                                <th width="50"><div align="center">AM/PM</div></th>
+                                  <th width="50"><div align="center">Strength</div></th>
+                            <!--    <td width="153"><div align="center">Status</div></td>-->
+                                <th width="154"><div align="center">
+
+                                </div></th>
+                               </tr>
+                              </thead>
+
+                              <tbody id="tableData">
+
+                              {% for s in slt %}
+                               <tr class="tr-shadow"><td align="center">{{ forloop.counter }}</td>
+                                <td align="center">{{ s.start }}</td>
+                                <td align="center">{{ s.t1 }}</td>
+                                <td align="center">{{ s.end }}</td>
+                                <td align="center">{{ s.t2 }}</td>
+                                   <td align="center">{{ s.strength }}</td>
+                                 <td align="center"> <a href="{% url 'updateslot' s.id %}">Edit</a>&nbsp;<a href="{% url 'deleteslot' s.id %}">Delete</a></td>
+                              </tr>
+
+                      {% endfor %}
+                              </tbody>
+                        </table>
+                     </div>
+
+                </div>
+            </div>
+
 
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -124,4 +126,5 @@ $(document).ready(function() {
 }
 
 </script>
-{% endblock %}
+
+{% include "admin_footer.html" %}
