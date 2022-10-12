@@ -196,9 +196,13 @@ class Result(models.Model):
         return self.appointment
 
 
+
+class Dayonly(models.Model):
+    date = models.DateField()
+
+
 class Day(models.Model):
-    # sid = models.ForeignKey(Slot, on_delete=models.CASCADE)
-    date=models.DateField()
+    did = models.ForeignKey(Dayonly, on_delete=models.CASCADE, default=1)
     start = models.PositiveIntegerField(default=0)
     end = models.PositiveIntegerField(default=0)
     t1 = models.CharField(max_length=5)
@@ -210,6 +214,6 @@ class Day(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return self.sid
+    # def __str__(self):
+    #     return self.start
 

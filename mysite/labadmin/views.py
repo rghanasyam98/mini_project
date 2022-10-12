@@ -6,7 +6,8 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
-from.models import Patient,Slot,Customer,User,Appointment,Category,Feedback,Home,Info,Order,Payment,Result,Test
+import datetime
+from.models import Patient,Slot,Customer,User,Appointment,Category,Feedback,Home,Info,Order,Payment,Result,Test,Day,Dayonly
 
 
 User = get_user_model()
@@ -56,6 +57,72 @@ def deletetest(request,tid):
     entry.delete()
 
     return redirect('test_management')
+
+@login_required
+def date_management(request):
+    dd=Day.objects.all().values()
+    # dd=Day.objects.select_related('category')
+    current_date = datetime.date.today()
+    # print(current_date)
+    # d=Day.objects.all(date_gte = current_date).distinct()
+    d = Day.objects.all().distinct()
+    # context={'dd':dd,'disday':d}
+
+
+    return render(request,'labadmin/datemanage.html',)
+
+@login_required
+def listbydate(request):
+    did = request.GET['ddate']
+    # print(cat_id)
+    cat = Day.objects.filter(id=did)
+    qs_json = serialize('json', cat)
+    print(qs_json)
+    return JsonResponse({"testresult": qs_json})
+
+@login_required
+def deletedayslot(request, dsid):
+    entry = Day.objects.get(id=dsid)
+    print(entry)
+    entry.delete()
+
+
+    return redirect('date_management')
+
+
+
+@login_required
+def add_date(request):
+    d=request.POST['tdate']
+    # print(d)
+    slt=Slot.objects.all().values()
+    # print(slt)
+    d_date = Dayonly()
+    d_date.date = d
+    d_date.save()
+    # entry = Dayonly.objects.get()
+    # did=Dayonly.objects.latest('id')
+    LastInsertId = int((Dayonly.objects.last()).id)
+    print(LastInsertId)
+
+    for s in slt:
+        dd=Day()
+        dd.date=d
+        dd.start=s.get('start')
+        dd.end=s.get('end')
+        dd.t1=s.get('t1')
+        dd.t2=s.get('t2')
+        dd.strength=s.get('strength')
+        dd.astrength=s.get('strength')
+        dd.status = "Available"
+        dd.category_id=s.get('category_id')
+        # dd.did=LastInsertId
+
+        dd.save()
+
+    return redirect('date_management')
+
+
 
 @login_required
 def slot_management(request):
@@ -439,7 +506,14 @@ def getupdatedslotdata(request):
     slt.save()
     return redirect('slot_management')
 
-
+@login_required
+def listbydate(request):
+    did = request.GET['ddate']
+    # print(cat_id)
+    cat = Day.objects.filter(id=did)
+    qs_json = serialize('json', cat)
+    print(qs_json)
+    return JsonResponse({"testresult": qs_json})
 
 
 

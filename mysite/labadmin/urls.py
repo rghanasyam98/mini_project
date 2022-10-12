@@ -10,6 +10,8 @@ urlpatterns = [
      path('signin', views.signin, name='signin'),
      path('signup', views.signup, name='signup'),
      path('slot_management', views.slot_management, name='slot_management'),
+     path('date_management', views.date_management, name='date_management'),
+     path('add_date', views.add_date, name='add_date'),
      path('cat', views.cat_management, name='cat_management'),
      path('slot', views.addslot, name='slot'),
      path('login_user', views.login_user, name='login_user'),
@@ -29,6 +31,8 @@ urlpatterns = [
      path('deletecat/<int:catid>/', views.deletecat, name='deletecat'),
      path('deletetest/<int:tid>/', views.deletetest, name='deletetest'),
      path('updatetest/<int:tid>/', views.updatetest, name='updatetest'),
+     path('listbydate', views.listbydate, name='listbydate'),
+     path('deletedayslot/<int:dsid>/', views.deletedayslot, name='deletedayslot'),
 
 
 ]

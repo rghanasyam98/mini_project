@@ -7,38 +7,36 @@
 
 <body>
 
-<form action="" method="post" name="update profile">
+<form action="{% url 'getupdatedprofile' %}" method="post" name="update profile">
+  {% csrf_token %}
   <div align="center">
     <table width="579" border="1">
       <tr>
         <td width="132" height="62"><div align="center">Name</div></td>
         <td width="431"><label for="name"></label>
           <div align="center">
-            <input type="text" name="name" id="name" />
+            <input type="text" name="name" id="name" value="{{ usr.name }}"/>
         </div></td>
       </tr>
       <tr>
         <td height="72"><div align="center">Address</div></td>
         <td><label for="addr"></label>
           <div align="center">
-            <textarea name="addr" id="addr" cols="45" rows="5"></textarea>
+            <textarea name="addr" id="addr" cols="45" rows="5">{{ usr.address }}</textarea>
         </div></td>
       </tr>
-      <tr>
-        <td height="73"><div align="center">Date of birth</div></td>
-        <td>&nbsp;</td>
-      </tr>
+
       <tr>
         <td height="72"><div align="center">Gender</div></td>
         <td><p align="center"><br />
           </p>
           <p>
             <label>
-              <input type="radio" name="RadioGroup1" value="gen" id="RadioGroup1_0" />
+              <input type="radio" name="gender" value="gen" id="RadioGroup1_0" {% if p1 == 1 %} checked="checked"{% endif %}/>
               Male</label>
             <br />
             <label>
-              <input type="radio" name="RadioGroup1" value="gen" id="RadioGroup1_1" />
+              <input type="radio" name="gender" value="gen" id="RadioGroup1_1" {% if p1 == 0 %} checked="checked"{% endif %}/>
               Female</label>
             <br />
           </p>
@@ -48,21 +46,21 @@
         <td height="71"><div align="center">Phone</div></td>
         <td><label for="phone"></label>
           <div align="center">
-            <input type="text" name="phone" id="phone" />
+            <input type="text" name="mob" id="phone" value="{{ usr.phone }}" />
         </div></td>
       </tr>
       <tr>
         <td height="61"><div align="center">Email</div></td>
         <td><label for="email"></label>
           <div align="center">
-            <input type="email" name="email" id="email" />
+            <input type="email" name="email" id="email" value="{{ useremail.email }}" />
         </div></td>
       </tr>
       <tr>
         <td height="56"><div align="center">Password</div></td>
         <td><div align="center">
           <label for="password"></label>
-          <input type="password" name="password" id="password" />
+          <input type="password" name="pwd" id="password" />
         </div></td>
       </tr>
       <tr>

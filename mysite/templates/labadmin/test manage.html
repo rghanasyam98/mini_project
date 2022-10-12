@@ -31,10 +31,10 @@
    <input type="submit" name="addtest" id="addtest" value="Add New" />
 
   <br><br>
-<table class="table">
-        <thead class="table-dark">
+ <table id="example" class="display" >
+        <thead>
   <tr>
-    <td width="62" height="57"><div align="center">Sl No</div></td>
+    <th width="62" height="57"><div align="center">Sl No</div></th>
     <th width="485"><div align="center">Test Name</div></th>
     <th width="505"><div align="center">Description</div></th>
     <th width="153"><div align="center">Price</div></th>
@@ -121,6 +121,15 @@ $(document).ready(function() {
         k+='</tbody>';
         document.getElementById('tableData').innerHTML = k;
 }
+
+</script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+    $('#example').DataTable();
+
+});
 
 </script>
 {% endblock %}
