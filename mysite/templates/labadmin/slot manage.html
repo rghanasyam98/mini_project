@@ -18,7 +18,7 @@
 
  <select name="category" id="category">
   {% for cat in catgry %}
-    <option value="{{ cat.id }}">{{ cat.name }}</option>
+    <option value="{{ cat.id }}"  {% if cat.id == caty.id %} selected  {% endif %}>{{ cat.name }}</option>
    {% endfor %}
   </select></div>
 
@@ -36,7 +36,22 @@
 
     </div></td>
   </tr>
-  <tbody id="tableData"></tbody>
+  <tbody id="tableData">
+
+  {% for s in slt %}
+  <tr><td align="center">{{ forloop.counter }}</td>
+    <td align="center">{{ s.start }}</td>
+    <td align="center">{{ s.t1 }}</td>
+    <td align="center">{{ s.end }}</td>
+    <td align="center">{{ s.t2 }}</td>
+       <td align="center">{{ s.strength }}</td>
+     <td align="center"> <a href="{% url 'updateslot' s.id %}">Edit</a>&nbsp;<a href="{% url 'deleteslot' s.id %}">Delete</a></td>
+  </tr>
+  {% endfor %}
+
+
+
+  </tbody>
 </table>
 
 
@@ -90,12 +105,13 @@ $(document).ready(function() {
 
 
             k+= '<tr>';
-            k+= '<td>'+ (i+1) +'</td>'
-            k+= '<td>' + mainObj[i]["fields"]["start"] + '</td>';
-            k+= '<td>' + mainObj[i]["fields"]["t1"] + '</td>';
-            k+= '<td>' + mainObj[i]["fields"]["end"] + '</td>';
-            k+= '<td>' + mainObj[i]["fields"]["t2"] + '</td>';
-            k+= '<td>' + mainObj[i]["fields"]["strength"] + '</td>';
+            k+= '<td align="center">'+ (i+1) +'</td>'
+            k+= '<td align="center">' + mainObj[i]["fields"]["start"] + '</td>';
+            k+= '<td align="center">' + mainObj[i]["fields"]["t1"] + '</td>';
+            k+= '<td align="center">' + mainObj[i]["fields"]["end"] + '</td>';
+            k+= '<td align="center">' + mainObj[i]["fields"]["t2"] + '</td>';
+            k+= '<td align="center">' + mainObj[i]["fields"]["strength"] + '</td>';
+            k+= '<td align="center"> <a href="/updateslot/'+mainObj[i]["pk"]+'">Edit </a> <a href="/deleteslot/'+mainObj[i]["pk"]+'">Delete</a> ';
 
 
 

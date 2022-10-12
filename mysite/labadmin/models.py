@@ -68,7 +68,7 @@ class Slot(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return '%s %s' %(self.category, self.time)
+        return '%s %s' %(self.category, self.category)
 
 
 

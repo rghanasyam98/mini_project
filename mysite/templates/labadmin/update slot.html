@@ -75,28 +75,56 @@ input:checked + .slider:before {
   {% csrf_token %}
   <div align="center">
     <table width="547" height="314" border="1">
+
+<!--      <tr>-->
+<!--        <td height="55"> <div align="center">Category</div></td>-->
+<!--      <td><label for="category"></label>-->
+<!--        <div align="center">-->
+<!--          <select name="category" id="category">-->
+<!--            {% for cat in catgry %}-->
+<!--            <option value="{{ cat.id }}"  {% if cat.id == slt.category_id %} selected  {% endif %}>{{cat.name}}</option>-->
+<!--            {% endfor %}-->
+<!--          </select>-->
+<!--        </div></td>-->
+<!--      </tr>-->
+
       <tr>
-        <td width="251"><div align="center">Slot interval (Eg 10am - 11am)</div></td>
+        <td width="251"> <div align="center">Slot interval start</div></td>
         <td width="280"><div align="center">
-          <input type="text" name="slot_interval" id="slot" />
+          <input type="text" name="start" id="slot"  value="{{ slt.start }}" />  <select name="t1" id="t1">
+          <option value="AM" {% if p1 == 1 %} selected  {% endif %}>AM</option>
+           <option value="PM" {% if p1 == 0 %} selected  {% endif %}>PM</option>
+        </select>
         </div></td>
       </tr>
+
       <tr>
-        <td><div align="center">Strength</div></td>
+        <td width="251"> <div align="center">Slot interval end</div></td>
+        <td width="280"><div align="center">
+          <input type="text" name="end" id="slot2"  value="{{ slt.end }}" />
+           <select name="t2" id="t2">
+          <option value="AM"   {% if p2 == 1 %} selected  {% endif %}>AM</option>
+           <option value="PM"  {% if p2 == 0 %} selected  {% endif %}>PM</option>
+        </select>
+        </div></td>
+      </tr>
+
+      <tr>
+        <td> <div align="center">Strength</div></td>
         <td><label for="strength"></label>
           <div align="center">
-            <input type="text" name="strength" id="strength" />
+            <input type="text" name="strength" id="strength"  value="{{ slt.strength }}"/>
         </div></td>
       </tr>
-      <tr>
-        <td colspan="2"><div align="center">Available Now : <!-- Rounded switch -->
-<label class="switch">
-  <div align="center">
-    <input type="checkbox" name="slot_status">
-    <span class="slider round"></span>
-  </div>
-</label></div><div align="center"></td>
-      </tr>
+<!--      <tr>-->
+<!--        <td colspan="2"<div align="center">Available Now : &lt;!&ndash; Rounded switch &ndash;&gt;-->
+<!--<label class="switch">-->
+<!--  <div align="center">-->
+<!--    <input type="checkbox" name="slot_status">-->
+<!--    <span class="slider round"></span>-->
+<!--  </div>-->
+<!--</label></div></td>-->
+<!--      </tr>-->
       <tr>
         <td colspan="2"><div align="center"><input name="addslot" type="submit" id="addslot" value="Update" /></div></td>
       </tr>
